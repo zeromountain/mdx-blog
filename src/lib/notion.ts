@@ -1,10 +1,9 @@
-import { Client } from "@notionhq/client";
-import {
-  BlockObjectResponse,
-  PageObjectResponse,
-} from "@notionhq/client/build/src/api-endpoints";
-import React from "react";
-import "server-only";
+import 'server-only';
+
+import React from 'react';
+
+import { Client } from '@notionhq/client';
+import { BlockObjectResponse, PageObjectResponse } from '@notionhq/client/build/src/api-endpoints';
 
 export const notion = new Client({
   auth: process.env.NOTION_API_KEY,
@@ -15,15 +14,15 @@ export const fetchPages = React.cache(() => {
     .query({
       database_id: process.env.NOTION_DATABASE_ID!,
       filter: {
-        property: "status",
+        property: 'status',
         status: {
-          equals: "Live",
+          equals: 'Live',
         },
       },
     })
     .then((res) => {
       const page = res.results[0] as PageObjectResponse;
-      // console.log(page.properties?.name?.title?.[0]?.plain_text);
+      console.log(page);
       return res.results as PageObjectResponse[];
     })
     .catch((err) => console.error(err));
@@ -34,7 +33,7 @@ export const fetchBySlug = React.cache((slug: string) => {
     .query({
       database_id: process.env.NOTION_DATABASE_ID!,
       filter: {
-        property: "slug",
+        property: 'slug',
         rich_text: {
           equals: slug,
         },

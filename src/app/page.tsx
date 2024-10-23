@@ -1,9 +1,10 @@
-import { fetchPages } from "@/lib/notion";
-import { Card, CardBody, CardHeader } from "@nextui-org/react";
-import Image from "next/image";
+import Image from 'next/image';
+import Link from 'next/link';
+import { notFound } from 'next/navigation';
 
-import Link from "next/link";
-import { notFound } from "next/navigation";
+import { Card, CardBody, CardHeader } from '@nextui-org/react';
+
+import { fetchPages } from '@/lib/notion';
 
 export default async function Home() {
   const posts = await fetchPages();
@@ -15,14 +16,8 @@ export default async function Home() {
       {posts.map((post: any) => {
         return (
           <article key={post.id}>
-            <Link
-              href={`/blog/${post.properties.slug.rich_text[0].plain_text}`}
-            >
-              <Card
-                isHoverable
-                isPressable
-                className="w-full transition-all hover:scale-105"
-              >
+            <Link href={`/blog/${post.properties.slug.rich_text[0].plain_text}`}>
+              <Card isHoverable isPressable className="w-full transition-all hover:scale-105">
                 <CardHeader>
                   <h2>{post.properties.name.title[0].plain_text}</h2>
                 </CardHeader>
