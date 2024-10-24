@@ -21,8 +21,6 @@ export const fetchPages = React.cache(() => {
       },
     })
     .then((res) => {
-      const page = res.results[0] as PageObjectResponse;
-      console.log(page);
       return res.results as PageObjectResponse[];
     })
     .catch((err) => console.error(err));
