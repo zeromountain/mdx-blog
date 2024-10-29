@@ -5,8 +5,8 @@ import { BlockObjectResponse } from '@notionhq/client/build/src/api-endpoints';
 
 import { fetchBySlug, fetchPageBlocks, notion } from '@/lib/notion';
 
-export default async function SlugPost({ params }: { params: { slug: string } }) {
-  const post = await fetchBySlug(params.slug);
+export default async function SlugPost({ params }: { params: { id: string } }) {
+  const post = await fetchBySlug(params.id);
 
   if (!post) {
     return <div>Not Found Post</div>;
@@ -28,9 +28,7 @@ export default async function SlugPost({ params }: { params: { slug: string } })
       dangerouslySetInnerHTML={{
         __html: html,
       }}
-      className="prose overflow-hidden bg-red-500"
+      className="prose w-full max-w-screen-md overflow-hidden scrollbar-hide"
     />
-    // <div>{html}</div>
-    // <div className="">SlugPost{params.slug}</div>
   );
 }

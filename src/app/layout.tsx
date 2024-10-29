@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import localFont from 'next/font/local';
 
+import Navigation from '@/components/common/navigation';
 import { HomeLayout } from '@/components/layouts/home-layouts';
 import { WithNextUIProvider } from '@/providers/with-next-ui-provider';
 
@@ -24,17 +25,15 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children,
-  modal,
 }: Readonly<{
   children: React.ReactNode;
-  modal: React.ReactNode;
 }>) {
   return (
     <html lang="en">
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
         <WithNextUIProvider>
+          <Navigation />
           <HomeLayout>{children}</HomeLayout>
-          {modal}
         </WithNextUIProvider>
       </body>
     </html>
