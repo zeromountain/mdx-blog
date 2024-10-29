@@ -6,6 +6,8 @@ import { BlockObjectResponse } from '@notionhq/client/build/src/api-endpoints';
 import { BackButton } from '@/components/common/back';
 import { fetchBySlug, fetchPageBlocks, notion } from '@/lib/notion';
 
+import BlogContent from './_components/blog-content';
+
 export default async function SlugPost({ params }: { params: { id: string } }) {
   const post = await fetchBySlug(params.id);
 
@@ -22,17 +24,15 @@ export default async function SlugPost({ params }: { params: { id: string } }) {
   renderer.use(hljsPlugin({}));
   renderer.use(bookmarkPlugin(undefined));
 
+  console.log({ block: blocks.find((block) => block.type === 'code')?.code.language });
+  const language = blocks.find((block) => block.type === 'code')?.code.language as string;
+
   const html = await renderer.render(...blocks);
 
   return (
     <>
       <BackButton />
-      <div
-        dangerouslySetInnerHTML={{
-          __html: html,
-        }}
-        className="prose w-full max-w-screen-md overflow-hidden scrollbar-hide"
-      />
+      {/* <BlogContent html={html} language={language} /> */}
     </>
   );
 }

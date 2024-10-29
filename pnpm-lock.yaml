@@ -65,6 +65,9 @@ dependencies:
   next:
     specifier: 14.2.16
     version: 14.2.16(react-dom@18.3.1)(react@18.3.1)
+  prismjs:
+    specifier: ^1.29.0
+    version: 1.29.0
   react:
     specifier: ^18
     version: 18.3.1
@@ -85,6 +88,9 @@ devDependencies:
   '@types/node':
     specifier: ^20
     version: 20.16.15
+  '@types/prismjs':
+    specifier: ^1.26.5
+    version: 1.26.5
   '@types/react':
     specifier: ^18
     version: 18.3.12
@@ -3443,6 +3449,10 @@ packages:
     dependencies:
       undici-types: 6.19.8
 
+  /@types/prismjs@1.26.5:
+    resolution: {integrity: sha512-AUZTa7hQ2KY5L7AmtSiqxlhWxb4ina0yd8hNbl4TWuqnv/pFP0nDMb3YrfSBf4hJVGLh2YEIBfKaBW/9UEl6IQ==}
+    dev: true
+
   /@types/prop-types@15.7.13:
     resolution: {integrity: sha512-hCZTSvwbzWGvhqxp/RqVqwU999pBf2vp7hzIjiYOsl8wqOmUxkQ6ddw1cV3l8811+kdUFus/q4d1Y3E3SyEifA==}
 
@@ -5866,6 +5876,11 @@ packages:
     engines: {node: '>=14'}
     hasBin: true
     dev: true
+
+  /prismjs@1.29.0:
+    resolution: {integrity: sha512-Kx/1w86q/epKcmte75LNrEoT+lX8pBpavuAbvJWRXar7Hz8jrtF+e3vY751p0R8H9HdArwaCTNDDzHg/ScJK1Q==}
+    engines: {node: '>=6'}
+    dev: false
 
   /prop-types@15.8.1:
     resolution: {integrity: sha512-oj87CgZICdulUohogVAR7AjlC0327U4el4L6eAvOqCeudMDVU0NThNaV+b9Df4dXgSP1gXMTnPdhfe/2qDH5cg==}
