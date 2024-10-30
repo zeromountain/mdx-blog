@@ -6,12 +6,16 @@
   "tabWidth": 2,
   "plugins": ["@trivago/prettier-plugin-sort-imports", "prettier-plugin-tailwindcss"],
   "importOrder": [
-    "^react$",
     "^next(/.*)?$",
+    "^react(/.*)?$",
     "^@nextui-org/.*",
     "^(third-party|@notionhq/client|@notion-render/.*)",
+    "^react-notion-x",
+    "^notion-client$",
+    "^notion-types$",
     "^@/(.*)$",
-    "^((./|../).*)$"
+    "^((./|../).*)$",
+    "^.+\\.css$"
   ],
   "importOrderSeparation": true,
   "importOrderSortSpecifiers": true

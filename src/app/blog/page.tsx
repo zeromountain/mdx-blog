@@ -11,12 +11,14 @@ export default async function Post() {
 
   if (!posts) return notFound();
 
+  console.log({ posts });
+
   return (
     <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3">
       {posts.map((post: any) => {
         return (
           <article key={post.id}>
-            <Link href={`/blog/${post.properties.slug.rich_text[0].plain_text}`}>
+            <Link href={`/blog/${post.id}`}>
               <Card isHoverable isPressable className="w-full transition-all hover:scale-105">
                 <CardHeader>
                   <h2>{post.properties.name.title[0].plain_text}</h2>

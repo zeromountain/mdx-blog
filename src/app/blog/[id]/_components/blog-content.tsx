@@ -1,14 +1,30 @@
 'use client';
 
-import Prism from 'prismjs';
-import 'prismjs/components/prism-jsx';
-import 'prismjs/themes/prism-tomorrow.css';
+import Image from 'next/image';
 
-export default function BlogContent({ html, language }: { html: string; language: string }) {
+import { NotionRenderer } from 'react-notion-x';
+import { Code } from 'react-notion-x/build/third-party/code';
+import { Collection } from 'react-notion-x/build/third-party/collection';
+import { Equation } from 'react-notion-x/build/third-party/equation';
+import { Modal } from 'react-notion-x/build/third-party/modal';
+import 'react-notion-x/src/styles.css';
+
+import { ExtendedRecordMap } from 'notion-types';
+
+export default function BlogContent({ recordMap }: { recordMap: ExtendedRecordMap }) {
   return (
-    <div
-      dangerouslySetInnerHTML={{ __html: Prism.highlight(html, Prism.languages[language], language) }}
-      className="prose prose-indigo w-full max-w-screen-md overflow-hidden scrollbar-hide"
+    <NotionRenderer
+      recordMap={recordMap}
+      components={{
+        nextImage: Image,
+        Code,
+        Collection,
+        Modal,
+        Equation,
+      }}
+      fullPage={true}
+      previewImages={false}
+      disableHeader
     />
   );
 }
