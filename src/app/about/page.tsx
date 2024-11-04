@@ -19,6 +19,7 @@ import SlackIcon from '@/assets/icon/slack-icon';
 import TailwindIcon from '@/assets/icon/tailwind-icon';
 import TsIcon from '@/assets/icon/ts-icon';
 
+import ProjectItem from './_components/project-item';
 import SkillItem from './_components/skill-item';
 import WorkingHistoryItem from './_components/working-history-item';
 
@@ -165,6 +166,43 @@ export default function AboutPage() {
       </section>
       <section>
         <h3 className="text-lg font-bold">PROJECTS</h3>
+        {/* 프로젝트 리스트 */}
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+          {[
+            {
+              id: 1,
+              name: '프로젝트 1',
+              description: '프로젝트 1 설명',
+            },
+            {
+              id: 2,
+              name: '프로젝트 2',
+              description: '프로젝트 2 설명',
+            },
+            {
+              id: 3,
+              name: '프로젝트 3',
+              description: '프로젝트 3 설명',
+            },
+            {
+              id: 4,
+              name: '프로젝트 4',
+              description: '프로젝트 4 설명',
+            },
+            {
+              id: 5,
+              name: '프로젝트 5',
+              description: '프로젝트 5 설명',
+            },
+            {
+              id: 6,
+              name: '프로젝트 6',
+              description: '프로젝트 6 설명',
+            },
+          ].map((project) => (
+            <ProjectItem key={project.id} name={project.name} description={project.description} />
+          ))}
+        </div>
       </section>
     </div>
   );
