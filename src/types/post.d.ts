@@ -96,6 +96,34 @@ export interface PostDatabaseResponse {
   };
 }
 
+export interface PostContentResult {
+  object: string;
+  id: string;
+  parent: any[];
+  created_time: string;
+  last_edited_time: string;
+  created_by: any[];
+  last_edited_by: any[];
+  has_children: boolean;
+  archived: boolean;
+  in_trash: boolean;
+  type: string;
+  paragraph: {
+    rich_text: TextType[];
+    color: string;
+  }[];
+}
+
+export interface PostContentResponse {
+  object: string;
+  results: any[];
+  next_cursor?: string;
+  has_more: boolean;
+  type: string;
+  block: any;
+  request_id: string;
+}
+
 export interface TagDatabaseResponse {
   id: string;
   color: string;
