@@ -18,6 +18,7 @@ import ReactQueryIcon from '@/assets/icon/reactquery-icon';
 import SlackIcon from '@/assets/icon/slack-icon';
 import TailwindIcon from '@/assets/icon/tailwind-icon';
 import TsIcon from '@/assets/icon/ts-icon';
+import { PROJECTS } from '@/constants/project';
 
 import ProjectItem from './_components/project-item';
 import SkillItem from './_components/skill-item';
@@ -171,8 +172,8 @@ export default function AboutPage() {
           {[
             {
               id: 1,
-              name: '프로젝트 1',
-              description: '프로젝트 1 설명',
+              name: 'luxon',
+              description: PROJECTS.luxon.description,
             },
             {
               id: 2,
