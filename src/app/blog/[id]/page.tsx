@@ -5,7 +5,7 @@ import { fetchPages, fetchPostMetadata, fetchSlugPost } from '@/lib/notion';
 
 import BlogContent from './_components/blog-content';
 
-export const revaildate = 1800;
+export const revalidate = 1800;
 
 type Props = {
   params: {

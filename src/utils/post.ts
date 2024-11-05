@@ -25,8 +25,6 @@ export function isPostDatabaseResponse(obj: unknown): obj is PostDatabaseRespons
 
   const o = obj as PostDatabaseResponse;
 
-  // console.log('isPostDatabaseResponse', { type: typeof obj.properties, properties: obj.properties });
-
   if (typeof o.id !== 'string') return false;
   if (typeof o.properties !== 'object' || o.properties === null) return false;
   if (typeof o.properties.title !== 'object' || !Array.isArray(o.properties.title.rich_text)) return false;
@@ -68,20 +66,11 @@ export class Post implements IPost {
       return new Post(data);
     }
     if (isPostDatabaseResponse(data)) {
-      console.log('isPostDatabaseResponse');
       const title = data.properties.title.rich_text[0] ? data.properties.title.rich_text[0]?.plain_text : '';
       const tags = data.properties.tag.multi_select;
       const cover = data.cover?.external?.url ?? '/default.webp';
       const icon = data.icon?.external?.url ?? '/mascot.webp';
       const publishTime = data.properties.created_at.created_time;
-      // return new Post({
-      //   id: data.id,
-      //   title,
-      //   tags,
-      //   cover,
-      //   icon,
-      //   publishTime,
-      // });
 
       return {
         id: data.id,
@@ -93,14 +82,6 @@ export class Post implements IPost {
       };
     }
     throw Error('Post 객체 생성 오류');
-    // return {
-    //   id: '',
-    //   title: '',
-    //   tags: [],
-    //   cover: '',
-    //   icon: '',
-    //   publishTime: '',
-    // };
   }
 }
 
