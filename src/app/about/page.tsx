@@ -165,7 +165,7 @@ export default function AboutPage() {
           />
         </div>
       </section>
-      <section>
+      <section className="space-y-2">
         <h3 className="text-lg font-bold">PROJECTS</h3>
         {/* 프로젝트 리스트 */}
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
