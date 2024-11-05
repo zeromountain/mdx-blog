@@ -133,7 +133,7 @@ export default function AboutPage() {
           <li className="text-sm">UI/UX와 DX를 고려하여 기획 내용을 구현하는 것을 중요하게 생각합니다.</li>
         </ul>
       </section>
-      <section>
+      <section className="space-y-2">
         <h3 className="text-lg font-bold">SKILLS</h3>
         <div className="flex flex-col justify-center gap-2">
           {Object.entries(SKILLS).map(([category, skills]) => (
@@ -146,8 +146,8 @@ export default function AboutPage() {
           ))}
         </div>
       </section>
-      <section>
-        <h3 className="mb-2 text-lg font-bold">WORK EXPERIENCE</h3>
+      <section className="space-y-2">
+        <h3 className="text-lg font-bold">WORK EXPERIENCE</h3>
         <div className="flex flex-col gap-4">
           <WorkingHistoryItem
             company="너디스타"
@@ -177,8 +177,8 @@ export default function AboutPage() {
             },
             {
               id: 2,
-              name: '프로젝트 2',
-              description: '프로젝트 2 설명',
+              name: 'blog',
+              description: PROJECTS.blog.description,
             },
             {
               id: 3,

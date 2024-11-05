@@ -1,5 +1,7 @@
 'use client';
 
+import Link from 'next/link';
+
 import { Chip } from '@nextui-org/chip';
 import { useDisclosure } from '@nextui-org/modal';
 import { Divider } from '@nextui-org/react';
@@ -29,8 +31,14 @@ export default function ProjectItem({ name, description }: ProjectItemProps) {
       <CommonModal isOpen={isOpen} onClose={onClose} backdrop="blur">
         <div className="flex flex-col gap-4">
           <div className="flex flex-col gap-2">
-            <h4 className="text-xl font-bold">{project?.name}</h4>
-            <p className="text-sm">{project?.description}</p>
+            {project?.url ? (
+              <Link href={project.url} target="_blank">
+                <h4 className="text-xl font-bold">{project?.name}</h4>
+              </Link>
+            ) : (
+              <h4 className="text-xl font-bold">{project?.name}</h4>
+            )}
+            <p className="whitespace-pre-line text-sm">{project?.description}</p>
           </div>
           <Divider />
           <div className="flex flex-col gap-2">
@@ -43,7 +51,7 @@ export default function ProjectItem({ name, description }: ProjectItemProps) {
             {project?.distribution.map((item) => (
               <div key={item.title}>
                 <h6 className="text-sm font-bold">{item.title}</h6>
-                <p className="rounded-md bg-red-100 p-2 text-sm">{item.description}</p>
+                <p className="rounded-md bg-red-100 p-2 text-sm">{item.action}</p>
                 <p className="rounded-md bg-green-100 p-2 text-sm">{item.result}</p>
               </div>
             ))}
