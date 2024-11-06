@@ -7,6 +7,8 @@ import { Navbar, NavbarContent, NavbarItem } from '@nextui-org/navbar';
 
 import { cn } from '@/lib/utils';
 
+import ThemeSwitcher from './theme-switcher';
+
 const links = [
   {
     label: 'Home',
@@ -47,6 +49,7 @@ export default function Navigation() {
           </NavbarItem>
         ))}
       </NavbarContent>
+      <ThemeSwitcher />
     </Navbar>
   );
 }
