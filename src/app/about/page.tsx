@@ -171,6 +171,11 @@ export default function AboutPage() {
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
           {[
             {
+              id: 0,
+              name: 'pickX.AI',
+              description: PROJECTS['pickX.AI'].description,
+            },
+            {
               id: 1,
               name: 'luxon',
               description: PROJECTS.luxon.description,

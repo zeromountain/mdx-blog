@@ -52,7 +52,7 @@ export default function ProjectItem({ name, description }: ProjectItemProps) {
               <div key={item.title}>
                 <h6 className="text-sm font-bold">{item.title}</h6>
                 <p className="rounded-md bg-red-100 p-2 text-sm">{item.action}</p>
-                <p className="rounded-md bg-green-100 p-2 text-sm">{item.result}</p>
+                <p className="whitespace-pre-line rounded-md bg-green-100 p-2 text-sm">{item.result}</p>
               </div>
             ))}
           </div>

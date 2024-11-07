@@ -1,4 +1,50 @@
-export const PROJECTS = {
+type Project = {
+  name: string;
+  description: string;
+  url?: string;
+  skills: string[];
+  distribution: {
+    title: string;
+    action: string;
+    result: string;
+  }[];
+};
+
+export const PROJECTS: Record<string, Project> = {
+  'pickX.AI': {
+    name: 'pickX.AI',
+    description: 'pickX.AI는 이미지 생성 AI 모델을 활용한 사내 이미지 생성 서비스입니다.',
+    skills: ['React', 'Next.js', 'Typescript', 'Tanstack Query', 'Chakra UI', 'zustand'],
+    distribution: [
+      {
+        title: 'Tanstack Query 적용',
+        action: '기존 axios를 사용한 API 호출 방식에서 Tanstack Query로 변경',
+        result:
+          '재사용성이 떨어지는 axios 템플릿 코드 개선\n서버 상태 사용으로 클라이언트 상태 관리 최소화\nAPI 호출 최적화',
+      },
+      {
+        title: 'zustand 적용',
+        action: '기존 useState를 사용한 상태 관리 방식에서 zustand로 변경',
+        result: '지역 상태 관리 코드를 전역 상태 관리로 클라이언트 상태 관리 통합 개선',
+      },
+      {
+        title: '프로젝트 폴더 구조 개선',
+        action: '기존 프로젝트 폴더 구조에서 모듈화된 폴더 구조로 변경',
+        result: '프로젝트 관리 및 유지보수 용이성 증대',
+      },
+      {
+        title: '이미지 리스트 페이지 개선',
+        action: '이미지 레이아웃 시프트, LCP, FCP 개선',
+        result:
+          '이미지 메타데이터에서 추출한 width,height 정보를 통해 이미지 레이아웃 시프트 개선\nlazy 속성을 사용해 효율적인 이미지 자원의 로드 관리로 이미지 로드 속도 개선(평균 100ms -> 평균 200ms)\n최신 이미지 포맷 적용(png -> webp/avif)',
+      },
+      {
+        title: 'CDN 도입',
+        action: '기존 S3 버킷에 CloudFront 도입 및 이미지 리사이징 최적화 건의',
+        result: '이미지 리사이징 최적화로 이미지 로드 속도 개선(평균 200ms -> 평균 80ms)',
+      },
+    ],
+  },
   luxon: {
     name: 'Luxon',
     description: 'Luxon은 데스페라도 게미어를 위한 NFT 플랫폼입니다.',
