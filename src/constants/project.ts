@@ -41,7 +41,7 @@ export const PROJECTS: Record<string, Project> = {
       {
         title: 'CDN 도입',
         action: '기존 S3 버킷에 CloudFront 도입 및 이미지 리사이징 최적화 건의',
-        result: '이미지 리사이징 최적화로 이미지 로드 속도 개선(평균 200ms -> 평균 80ms)',
+        result: '이미지 리사이징 최적화로 이미지 로드 속도 개선(평균 200ms -> 평균 50ms)',
       },
     ],
   },
