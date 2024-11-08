@@ -5,7 +5,6 @@ import dayjs from 'dayjs';
 import Image from 'next/image';
 import Link from 'next/link';
 
-import { cn } from '@/lib/utils';
 import { IPost } from '@/types/post';
 
 import TagChip from './tag-chip';
