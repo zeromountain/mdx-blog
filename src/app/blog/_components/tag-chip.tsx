@@ -27,7 +27,7 @@ export default function TagChip({ id, name, color, notSelected, onClick }: TagCh
 
   return (
     <div
-      className={cn(dynamicTextColor, `text-12 rounded-4 clickable bg-${convertedBg}-500 px-12 py-4 text-white`)}
+      className={cn(dynamicTextColor, `text-12 rounded-4 clickable bg-${convertedBg}-500 p-2`)}
       onClick={handleTagClick}
     >
       {name}

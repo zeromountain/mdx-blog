@@ -5,6 +5,7 @@ import dayjs from 'dayjs';
 import Image from 'next/image';
 import Link from 'next/link';
 
+import { cn } from '@/lib/utils';
 import { IPost } from '@/types/post';
 
 import TagChip from './tag-chip';
@@ -28,11 +29,11 @@ export default function PostCard({ post }: PostCardProps) {
         <div className="flex w-full flex-col items-center gap-4">
           <time className="text-14 self-end p-4">{dayjs(publishTime).format('YYYY.MM.DD')}</time>
           <Image src={icon} alt="icon" width={24} height={24} />
-          <h2 className="w-full truncate px-12 text-center">{title}</h2>
+          <h2 className="w-full truncate px-12 text-center font-bold">{title}</h2>
           {tags.length > 0 && (
-            <div className="flex gap-8 p-4 pb-6">
+            <div className="flex flex-wrap gap-4 py-6">
               {tags.map(({ id, name, color }: any) => (
-                <TagChip key={`_${name}`} id={id} name={name} color={color} />
+                <TagChip key={id} id={id} name={name} color={color} />
               ))}
             </div>
           )}
