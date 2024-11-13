@@ -172,38 +172,23 @@ export default function AboutPage() {
           {[
             {
               id: 0,
+              name: 'operation-tool',
+              description: PROJECTS['operation-tool'].description,
+            },
+            {
+              id: 1,
               name: 'pickX.AI',
               description: PROJECTS['pickX.AI'].description,
             },
             {
-              id: 1,
+              id: 2,
               name: 'luxon',
               description: PROJECTS.luxon.description,
             },
             {
-              id: 2,
+              id: 3,
               name: 'blog',
               description: PROJECTS.blog.description,
-            },
-            {
-              id: 3,
-              name: '프로젝트 3',
-              description: '프로젝트 3 설명',
-            },
-            {
-              id: 4,
-              name: '프로젝트 4',
-              description: '프로젝트 4 설명',
-            },
-            {
-              id: 5,
-              name: '프로젝트 5',
-              description: '프로젝트 5 설명',
-            },
-            {
-              id: 6,
-              name: '프로젝트 6',
-              description: '프로젝트 6 설명',
             },
           ].map((project) => (
             <ProjectItem key={project.id} name={project.name} description={project.description} />

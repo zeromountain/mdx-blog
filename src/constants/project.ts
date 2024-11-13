@@ -45,6 +45,44 @@ export const PROJECTS: Record<string, Project> = {
       },
     ],
   },
+  'operation-tool': {
+    name: 'Operation Tool',
+    description: 'Four Ground Nine 게임 운영 툴입니다.',
+    skills: [
+      'React',
+      'Next.js',
+      'Refine',
+      'Typescript',
+      'Tanstack Query',
+      'Tanstack Table',
+      'MUI',
+      'Tailwind CSS',
+      'zustand',
+      'react-hook-form',
+    ],
+    distribution: [
+      {
+        title: 'Refine 적용',
+        action: '기존 프로젝트 폴더 구조에서 Refine 프레임워크 적용',
+        result: '프로젝트 관리 및 유지보수 용이성 증대',
+      },
+      {
+        title: '도커 컨테이너 적용',
+        action: '도커 컨테이너 이미지 사이즈 최적화',
+        result: '이미지 사이즈 최적화로 빌드 속도 개선(1분 40초 -> 50초)',
+      },
+      {
+        title: '멀티 도메인 적용',
+        action: 'provider 추가로 멀티 도메인 적용',
+        result: '다수의 API 도메인 관리 용이성 향상',
+      },
+      {
+        title: '테이블 컴포넌트 개선',
+        action: 'Tanstack Table 적용으로 테이블 컴포넌트 개선',
+        result: '서버 상태와 동일한 테이블 컴포넌트 구현으로 비동기 데이터 처리 용이성 향상',
+      },
+    ],
+  },
   luxon: {
     name: 'Luxon',
     description: 'Luxon은 데스페라도 게미어를 위한 NFT 플랫폼입니다.',
