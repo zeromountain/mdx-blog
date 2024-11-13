@@ -43,7 +43,9 @@ export default function ProjectItem({ name, description }: ProjectItemProps) {
           <Divider />
           <div className="flex flex-col gap-2">
             <h5 className="text-lg font-bold">Skills</h5>
-            <div className="flex gap-2">{project?.skills.map((skill) => <Chip key={skill}>{skill}</Chip>)}</div>
+            <div className="flex flex-wrap gap-2">
+              {project?.skills.map((skill) => <Chip key={skill}>{skill}</Chip>)}
+            </div>
           </div>
           <Divider />
           <div className="flex flex-col gap-2">

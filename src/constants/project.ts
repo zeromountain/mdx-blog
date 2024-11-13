@@ -69,7 +69,7 @@ export const PROJECTS: Record<string, Project> = {
       {
         title: '도커 컨테이너 적용',
         action: '도커 컨테이너 이미지 사이즈 최적화',
-        result: '이미지 사이즈 최적화로 빌드 속도 개선(1분 40초 -> 50초)',
+        result: '이미지 사이즈 최적화로 빌드 속도 개선',
       },
       {
         title: '멀티 도메인 적용',

@@ -13,7 +13,7 @@ export default function CommonModal({ children, onClose, ...props }: PropsWithCh
 
   return (
     <Modal {...props} placement="center" onClose={onClose ?? onDismiss}>
-      <ModalContent className="h-[80vh] w-full max-w-screen-md overflow-auto scrollbar-hide">
+      <ModalContent className="h-[80vh] w-full max-w-screen-md overflow-y-auto scrollbar-hide">
         <ModalBody className="w-full">{children}</ModalBody>
       </ModalContent>
     </Modal>
