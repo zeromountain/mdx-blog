@@ -117,6 +117,11 @@ export const PROJECTS: Record<string, Project> = {
         action: 'generateMetadata 함수와 generateStaticParams 함수를 추가하여 블로그 포스트 메타데이터 추가',
         result: '검색엔진 최적화 및 소셜 미디어 공유 시 메타데이터 노출',
       },
+      {
+        title: 'ISR 적용',
+        action: 'Incremental Static Regeneration을 적용하여 블로그 포스트 캐싱 최적화',
+        result: '블로그 포스트를 SSR 대신 ISR로 캐싱하여 블로그 포스트 로드 속도 개선',
+      },
     ],
   },
 };
