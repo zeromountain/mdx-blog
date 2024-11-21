@@ -96,8 +96,8 @@ export const PROJECTS: Record<string, Project> = {
       },
       {
         title: '가스비 최적화',
-        action: '컨트랙트 최적화 및 메타마스크 지갑 최적화로 가스비 감소',
-        result: '기존 불필요한 컨트랙트 삭제 및 최적화로 사용자가 지불하는 가스비 감소',
+        action: '컨트랙트 최적화 및 메타마스크 지갑 최적화',
+        result: '유저 지불하는 가스비 감소로 사용자 경험 개선',
       },
       {
         title: '어드민 에디터 개발',
