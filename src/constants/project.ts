@@ -20,7 +20,7 @@ export const PROJECTS: Record<string, Project> = {
         title: 'Tanstack Query 적용',
         action: '기존 axios를 사용한 API 호출 방식에서 Tanstack Query로 변경',
         result:
-          '재사용성이 떨어지는 axios 템플릿 코드 개선\n서버 상태 사용으로 클라이언트 상태 관리 최소화\nAPI 호출 최적화',
+          '재사용성이 떨어지는 axios 템플릿 코드 개선\n서버 상태 사용으로 클라이언트 상태 관리 최소화\nAPI 호출 개선',
       },
       {
         title: 'zustand 적용',
@@ -30,7 +30,7 @@ export const PROJECTS: Record<string, Project> = {
       {
         title: '프로젝트 폴더 구조 개선',
         action: '기존 프로젝트 폴더 구조에서 모듈화된 폴더 구조로 변경',
-        result: '프로젝트 관리 및 유지보수 용이성 증대',
+        result: '프로젝트 관리 및 유지보수 용이성 개선',
       },
       {
         title: '이미지 리스트 페이지 개선',
@@ -64,7 +64,7 @@ export const PROJECTS: Record<string, Project> = {
       {
         title: 'Refine 적용',
         action: '기존 프로젝트 폴더 구조에서 Refine 프레임워크 적용',
-        result: '프로젝트 관리 및 유지보수 용이성 증대',
+        result: '프로젝트 관리 및 유지보수 용이성 개선',
       },
       {
         title: '도커 컨테이너 적용',
@@ -74,12 +74,17 @@ export const PROJECTS: Record<string, Project> = {
       {
         title: '멀티 도메인 적용',
         action: 'provider 추가로 멀티 도메인 적용',
-        result: '다수의 API 도메인 관리 용이성 향상',
+        result: '다수의 API 도메인 관리 용이성 개선',
       },
       {
         title: '테이블 컴포넌트 개선',
         action: 'Tanstack Table 적용으로 테이블 컴포넌트 개선',
-        result: '서버 상태와 동일한 테이블 컴포넌트 구현으로 비동기 데이터 처리 용이성 향상',
+        result: '서버 상태와 동일한 테이블 컴포넌트 구현으로 비동기 데이터 처리 용이성 개선',
+      },
+      {
+        title: '다국어 지원',
+        action: 'i18next 적용으로 다국어 지원',
+        result: '영/중/일 언어 지원으로 어드민 사용자 편의성 개선',
       },
     ],
   },
@@ -92,7 +97,7 @@ export const PROJECTS: Record<string, Project> = {
       {
         title: '지갑 솔루션 마이그레이션',
         action: 'Metamask -> Immutable Passport',
-        result: '확장성 높은 지갑 관리 솔루션 제공으로 사용자 편의성 증대',
+        result: '확장성 높은 지갑 관리 솔루션 제공으로 사용자 편의성 개선',
       },
       {
         title: '가스비 최적화',
@@ -102,7 +107,7 @@ export const PROJECTS: Record<string, Project> = {
       {
         title: '어드민 에디터 개발',
         action: '데스페라도 게미어 관리자를 위한 에디터 개발',
-        result: '게이머 공지 작성 에디터 개발을 통해 담당자 업무 편의성 증대',
+        result: '게이머 공지 작성 에디터 개발을 통해 담당자 업무 편의성 개선',
       },
     ],
   },
@@ -115,7 +120,7 @@ export const PROJECTS: Record<string, Project> = {
       {
         title: '블로그 포스트 메타데이터 추가',
         action: 'generateMetadata 함수와 generateStaticParams 함수를 추가하여 블로그 포스트 메타데이터 추가',
-        result: '검색엔진 최적화 및 소셜 미디어 공유 시 메타데이터 노출',
+        result: '검색엔진 최적화 및 소셜 미디어 공유 시 메타데이터 제공',
       },
       {
         title: 'ISR 적용',
