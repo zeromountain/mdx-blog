@@ -32,7 +32,7 @@ export default function PostCard({ post }: PostCardProps) {
           {tags.length > 0 && (
             <div className="flex flex-wrap gap-4 py-6">
               {tags.map(({ id, name, color }: any) => (
-                <TagChip key={id} id={id} name={name} color={color} />
+                <TagChip key={id} name={name} color={color} />
               ))}
             </div>
           )}
