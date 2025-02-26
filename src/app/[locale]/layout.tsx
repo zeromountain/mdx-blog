@@ -1,5 +1,9 @@
+import { NextIntlClientProvider } from 'next-intl';
+import { getMessages } from 'next-intl/server';
+
 import type { Metadata } from 'next';
 import localFont from 'next/font/local';
+import { notFound } from 'next/navigation';
 
 import 'react-notion-x/src/styles.css';
 
@@ -7,6 +11,7 @@ import Navigation from '@/components/common/navigation';
 import { HomeLayout } from '@/components/layouts/home-layouts';
 import { WithNextUIProvider } from '@/providers/with-next-ui-provider';
 
+import { routing } from '../i18n/routing';
 import './globals.css';
 
 import 'katex/dist/katex.min.css';
@@ -28,17 +33,29 @@ export const metadata: Metadata = {
   description: '프론트엔드 개발자 손영산의 블로그입니다.',
 };
 
-export default function RootLayout({
+type Locale = 'ko' | 'en';
+
+export default async function RootLayout({
   children,
+  params: { locale },
 }: Readonly<{
   children: React.ReactNode;
+  params: { locale: Locale };
 }>) {
+  if (!routing.locales.includes(locale)) {
+    notFound();
+  }
+
+  const messages = await getMessages();
+
   return (
-    <html lang="en">
+    <html lang={locale}>
       <body className={`${geistSans.variable} ${geistMono.variable} overflow-hidden antialiased`}>
         <WithNextUIProvider>
-          <Navigation />
-          <HomeLayout>{children}</HomeLayout>
+          <NextIntlClientProvider messages={messages}>
+            <Navigation />
+            <HomeLayout>{children}</HomeLayout>
+          </NextIntlClientProvider>
         </WithNextUIProvider>
       </body>
     </html>

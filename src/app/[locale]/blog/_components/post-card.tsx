@@ -4,7 +4,9 @@ import dayjs from 'dayjs';
 
 import Image from 'next/image';
 import Link from 'next/link';
+import { useParams } from 'next/navigation';
 
+import { Locale } from '@/types/locale';
 import { IPost } from '@/types/post';
 
 import TagChip from './tag-chip';
@@ -14,10 +16,12 @@ type PostCardProps = {
 };
 
 export default function PostCard({ post }: PostCardProps) {
+  const params = useParams();
+  const locale = params.locale as Locale;
   const { id, cover, title, publishTime, icon, tags } = post;
 
   return (
-    <Link href={`/blog/${id}`} className="block h-min">
+    <Link href={`/${locale}/blog/${id}`} className="block h-min">
       <article className="clickable w-320 flex flex-col items-center rounded-sm shadow-lg hover:-translate-x-1 hover:-translate-y-1">
         <div className={`relative`}>
           {cover && <Image src={cover} alt="cover" width={320} height={200} style={{ width: 320, height: 200 }} />}

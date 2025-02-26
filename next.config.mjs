@@ -1,5 +1,8 @@
 import fs from 'fs';
+import createNextIntlPlugin from 'next-intl/plugin';
 import path from 'path';
+
+const withNextIntl = createNextIntlPlugin('./src/app/i18n/request.ts');
 
 const generateVerificationFile = () => {
   const verificationCode = process.env.GOOGLE_SITE_VERIFICATION;
@@ -37,4 +40,4 @@ const nextConfig = {
   },
 };
 
-export default nextConfig;
+export default withNextIntl(nextConfig);
