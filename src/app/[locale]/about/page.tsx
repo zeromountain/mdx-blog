@@ -1,103 +1,123 @@
 import Image from 'next/image';
 import Link from 'next/link';
 
-import AwsIcon from '@/assets/icon/aws-icon';
-import ChakrauiIcon from '@/assets/icon/chakraui-icon';
-import DockerIcon from '@/assets/icon/docker-icon';
 import EmailIcon from '@/assets/icon/email-icon';
-import FigmaIcon from '@/assets/icon/figma-icon';
-import GitIcon from '@/assets/icon/git-icon';
 import GithubIcon from '@/assets/icon/github-icon';
-import JiraIcon from '@/assets/icon/jira-icon';
 import LinkedinIcon from '@/assets/icon/linkedin-icon';
-import MuiIcon from '@/assets/icon/mui-icon';
-import NextjsIcon from '@/assets/icon/nextjs-icon';
-import ReactIcon from '@/assets/icon/react-icon';
-import ReactNativeIcon from '@/assets/icon/reactnative-icon';
-import ReactQueryIcon from '@/assets/icon/reactquery-icon';
-import SlackIcon from '@/assets/icon/slack-icon';
-import TailwindIcon from '@/assets/icon/tailwind-icon';
-import TsIcon from '@/assets/icon/ts-icon';
-import { PROJECTS } from '@/constants/project';
+import { AboutSection } from '@/components/about/about-section';
 
-import ProjectItem from './_components/project-item';
-import SkillItem from './_components/skill-item';
-import WorkingHistoryItem from './_components/working-history-item';
+// 임시 프로필 콘텐츠 컴포넌트
+function ProfileContent() {
+  return (
+    <div className="prose prose-lg dark:prose-invert">
+      <h2>소개</h2>
+      <p>
+        다양한 직군의 팀원들과 협업하며 다양한 경험을 쌓았습니다.
+        <br />
+        성장을 취우선 가치로 여기며 효율적인 업무 문화를 만들어가는 것을 중요하게 생각합니다.
+        <br />
+        UI/UX와 DX를 고려하여 기획 내용을 구현하는 것을 중요하게 생각합니다.
+      </p>
+      <h2>연락처</h2>
+      <ul>
+        <li>
+          GitHub:{' '}
+          <a href="https://github.com/zeromountain" target="_blank" rel="noopener noreferrer">
+            github.com/zeromountain
+          </a>
+        </li>
+        <li>
+          LinkedIn:{' '}
+          <a href="https://www.linkedin.com/in/yeongsan-son-b289551b0/" target="_blank" rel="noopener noreferrer">
+            linkedin.com/in/yeongsan-son-b289551b0/
+          </a>
+        </li>
+        <li>Email: yeongsan.mountain@gmail.com</li>
+      </ul>
+    </div>
+  );
+}
 
-const SKILLS = {
-  languages: [
+// 포트폴리오 콘텐츠 컴포넌트
+function PortfolioContent() {
+  const portfolioItems = [
     {
-      name: 'TypeScript',
-      icon: <TsIcon fontSize={32} />,
-    },
-  ],
-  frontend: [
-    {
-      name: 'React',
-      icon: <ReactIcon fontSize={32} />,
-    },
-    {
-      name: 'React Native',
-      icon: <ReactNativeIcon fontSize={32} />,
+      id: 1,
+      title: '노션 블로그',
+      description: 'Next.js와 노션 API를 활용한 개인 블로그 프로젝트',
+      techStack: ['Next.js', 'TypeScript', 'Tailwind CSS', 'Notion API'],
+      link: 'https://github.com/zeromountain/notion-blog',
+      thumbnail: '/projects/notion-blog.png',
     },
     {
-      name: 'Next.js',
-      icon: <NextjsIcon fontSize={32} />,
+      id: 2,
+      title: '웹 포트폴리오',
+      description: '개인 포트폴리오 웹사이트',
+      techStack: ['React', 'Next.js', 'TypeScript', 'Tailwind CSS'],
+      link: 'https://github.com/zeromountain/portfolio',
+      thumbnail: '/projects/portfolio.png',
     },
     {
-      name: 'MUI',
-      icon: <MuiIcon fontSize={32} />,
+      id: 3,
+      title: '개인 프로젝트',
+      description: '진행 중인 사이드 프로젝트',
+      techStack: ['React', 'TypeScript', 'Styled Components'],
+      link: '#',
+      thumbnail: '/projects/project-default.png',
     },
-    {
-      name: 'Tailwind CSS',
-      icon: <TailwindIcon fontSize={32} />,
-    },
-    {
-      name: 'Chakra UI',
-      icon: <ChakrauiIcon fontSize={32} />,
-    },
-    {
-      name: 'Tanstack Query',
-      icon: <ReactQueryIcon fontSize={32} />,
-    },
-  ],
-  infra: [
-    {
-      name: 'Docker',
-      icon: <DockerIcon fontSize={32} />,
-    },
-    {
-      name: 'AWS',
-      icon: <AwsIcon fontSize={32} />,
-    },
-  ],
-  tools: [
-    {
-      name: 'Git',
-      icon: <GitIcon fontSize={32} />,
-    },
-    {
-      name: 'Jira',
-      icon: <JiraIcon fontSize={32} />,
-    },
-    {
-      name: 'Figma',
-      icon: <FigmaIcon fontSize={32} />,
-    },
-    {
-      name: 'Slack',
-      icon: <SlackIcon fontSize={32} />,
-    },
-  ],
-};
+  ];
+
+  return (
+    <div className="prose prose-lg w-full dark:prose-invert">
+      <div className="grid w-full grid-cols-1 gap-6 md:grid-cols-2">
+        {portfolioItems.map((item) => (
+          <div
+            key={item.id}
+            className="overflow-hidden rounded-lg border border-gray-200 transition-shadow hover:shadow-md dark:border-gray-800"
+          >
+            <div className="relative h-48 w-full bg-gray-100 dark:bg-gray-800">
+              <Image src={item.thumbnail} alt={item.title} fill className="object-cover" />
+            </div>
+            <div className="p-4">
+              <h3 className="mt-0 text-lg font-medium">{item.title}</h3>
+              <p className="mt-1 text-sm text-gray-600 dark:text-gray-400">{item.description}</p>
+              <div className="mt-2 flex flex-wrap gap-2">
+                {item.techStack.map((tech) => (
+                  <span key={tech} className="rounded-md bg-gray-100 px-2 py-1 text-xs dark:bg-gray-800">
+                    {tech}
+                  </span>
+                ))}
+              </div>
+              <div className="mt-3">
+                <Link
+                  href={item.link}
+                  target="_blank"
+                  className="text-sm font-medium text-blue-600 hover:underline dark:text-blue-400"
+                >
+                  프로젝트 보기 →
+                </Link>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
 
 export default function AboutPage() {
+  const profileInfo = {
+    title: '손영산',
+    description: '프론트엔드 개발자',
+  };
+
   return (
     <div className="mx-auto flex min-h-0 w-full max-w-2xl flex-col gap-y-3 space-y-8 print:space-y-4">
+      {/* 프로필 헤더 섹션 */}
       <section className="flex flex-col-reverse items-center justify-between gap-4 sm:flex-row">
         <div className="flex flex-1 flex-col gap-2">
-          <h2 className="text-2xl font-bold">손영산</h2>
-          <p className="text-sm text-gray-500">FE DEVELOPER</p>
+          <h2 className="text-2xl font-bold">{profileInfo.title}</h2>
+          <p className="text-sm text-gray-500">{profileInfo.description}</p>
           <div className="flex gap-2">
             <Link
               href="https://github.com/zeromountain"
@@ -122,79 +142,24 @@ export default function AboutPage() {
           <Image src="/profile.jpeg" alt="profile" width={100} height={100} className="aspect-square h-full w-full" />
         </div>
       </section>
-      <section className="space-y-2">
-        <h3 className="text-lg font-bold">ABOUT</h3>
-        {/* 불릿리스트 */}
-        <ul className="list-disc space-y-2 px-4">
-          <li className="text-sm">다양한 직군의 팀원들과 협업하며 다양한 경험을 쌓았습니다.</li>
-          <li className="text-sm">
-            성장을 취우선 가치로 여기며 효율적인 업무 문화를 만들어가는 것을 중요하게 생각합니다.
-          </li>
-          <li className="text-sm">UI/UX와 DX를 고려하여 기획 내용을 구현하는 것을 중요하게 생각합니다.</li>
-        </ul>
-      </section>
-      <section className="space-y-2">
-        <h3 className="text-lg font-bold">SKILLS</h3>
-        <div className="flex flex-col justify-center gap-2">
-          {Object.entries(SKILLS).map(([category, skills]) => (
-            <div key={category} className="flex flex-wrap items-center gap-2">
-              <p className="min-w-[80px] text-sm font-bold">{category}</p>
-              {skills.map((skill) => (
-                <SkillItem key={skill.name} name={skill.name} icon={skill.icon} />
-              ))}
-            </div>
-          ))}
-        </div>
-      </section>
-      <section className="space-y-2">
-        <h3 className="text-lg font-bold">WORK EXPERIENCE</h3>
-        <div className="flex flex-col gap-4">
-          <WorkingHistoryItem
-            company="너디스타"
-            period="2023.10 ~ 현재"
-            job="프론트엔드"
-            projects={[]}
-            description={`P2E 게임 데스페라도의 주요 서비스인 LUXON 웹 유지보수 및 개발을 담당하며 게이머에게 웹 페이지를 통해 게임 재화 및 캐릭터를 NFT로 관리할 수 있는 환경을 제공하였습니다.\n이외에 사내 프로젝트 개발 및 유지보수를 리딩하며 프로젝트의 효율성을 높이는 작업을 진행하였습니다.`}
-          />
-          <WorkingHistoryItem
-            company="똑똑한개발자"
-            period="2022.05 ~ 2023.08"
-            job="프론트엔드"
-            projects={[]}
-            description={`React와 Next.js를 사용하여 웹 애플리케이션을 개발하였고, React Native를 사용해 모바일 앱을 개발하였습니다.\n팀원들과 코드 리뷰를 통해 코드 품질 향상을 고민하고 기술적인 경험과 지식을 공유하는 경험을 했습니다.`}
-          />
-        </div>
-      </section>
-      <section className="space-y-2">
-        <h3 className="text-lg font-bold">PROJECTS</h3>
-        {/* 프로젝트 리스트 */}
-        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-          {[
-            {
-              id: 0,
-              name: 'operation-tool',
-              description: PROJECTS['operation-tool'].description,
-            },
-            {
-              id: 1,
-              name: 'pickX.AI',
-              description: PROJECTS['pickX.AI'].description,
-            },
-            {
-              id: 2,
-              name: 'luxon',
-              description: PROJECTS.luxon.description,
-            },
-            {
-              id: 3,
-              name: 'blog',
-              description: PROJECTS.blog.description,
-            },
-          ].map((project) => (
-            <ProjectItem key={project.id} name={project.name} description={project.description} />
-          ))}
-        </div>
-      </section>
+
+      {/* 프로필 소개 섹션 */}
+      <AboutSection title="ABOUT">
+        <ProfileContent />
+      </AboutSection>
+
+      {/* 포트폴리오 섹션 */}
+      <AboutSection title="PORTFOLIO">
+        <PortfolioContent />
+      </AboutSection>
+
+      {/* 임시 메시지: 개발 중 */}
+      <div className="rounded-lg border border-yellow-200 bg-yellow-50 p-4 dark:border-yellow-900 dark:bg-yellow-900/20">
+        <h3 className="mb-2 font-medium">개발 중입니다</h3>
+        <p className="text-sm text-gray-600 dark:text-gray-400">
+          MDX 콘텐츠를 기반으로 한 포트폴리오 페이지로 현재 개발 중입니다. 곧 모든 섹션이 완성될 예정입니다.
+        </p>
+      </div>
     </div>
   );
 }

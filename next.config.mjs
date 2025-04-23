@@ -1,4 +1,5 @@
 import fs from 'fs';
+import { withContentlayer } from 'next-contentlayer';
 import createNextIntlPlugin from 'next-intl/plugin';
 import path from 'path';
 
@@ -36,8 +37,12 @@ const nextConfig = {
         protocol: 'https',
         hostname: 'images.unsplash.com',
       },
+      {
+        protocol: 'https',
+        hostname: 'res.cloudinary.com',
+      },
     ],
   },
 };
 
-export default withNextIntl(nextConfig);
+export default withContentlayer(withNextIntl(nextConfig));
