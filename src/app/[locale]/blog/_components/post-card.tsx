@@ -23,7 +23,10 @@ export default function PostCard({ post }: PostCardProps) {
           <div>
             <div className="mb-4 flex">
               {post.tags.map((tag) => (
-                <Chip key={tag} className="mr-2 bg-primary-100 text-xs text-primary-800">
+                <Chip
+                  key={tag}
+                  className="mr-2 bg-primary-100 text-xs text-primary-800 dark:bg-primary-900/30 dark:text-primary-300"
+                >
                   {tag}
                 </Chip>
               ))}

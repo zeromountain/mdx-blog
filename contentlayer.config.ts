@@ -17,6 +17,7 @@ export const Post = defineDocumentType(() => ({
     tags: { type: 'list', of: { type: 'string' }, default: [] },
     status: { type: 'string', required: true, default: 'Live' },
     slug: { type: 'string', required: true },
+    category: { type: 'string' }, // 카테고리 필드 추가 (선택적)
   },
   computedFields: {
     url: {
@@ -26,6 +27,16 @@ export const Post = defineDocumentType(() => ({
     readingTime: {
       type: 'json',
       resolve: (doc) => readingTime(doc.body.raw),
+    },
+    // 파일 경로에서 카테고리 자동 추출
+    category: {
+      type: 'string',
+      resolve: (doc) => {
+        // posts/카테고리/파일명.mdx 형태에서 카테고리 추출
+        const pathSegments = doc._raw.flattenedPath.split('/');
+        // posts 다음에 오는 부분이 카테고리
+        return pathSegments.length > 1 ? pathSegments[1] : 'uncategorized';
+      },
     },
   },
 }));

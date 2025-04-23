@@ -146,9 +146,43 @@ export function MDXContent({ code }: MDXContentProps) {
       ) {
         return <>{children}</>;
       }
-      return <p {...rest}>{children}</p>;
+      return (
+        <p className="text-sm" {...rest}>
+          {children}
+        </p>
+      );
     },
+    h1: (props: any) => <h1 className="mb-4 mt-8 text-3xl font-bold" {...props} />,
+    h2: (props: any) => <h2 className="mb-3 mt-6 text-2xl font-bold" {...props} />,
+    h3: (props: any) => <h3 className="mb-2 mt-5 text-xl font-semibold" {...props} />,
+    h4: (props: any) => <h4 className="mb-2 mt-4 text-lg font-semibold" {...props} />,
+    h5: (props: any) => <h5 className="mb-1 mt-3 text-base font-semibold" {...props} />,
+    h6: (props: any) => <h6 className="mb-1 mt-3 text-sm font-semibold" {...props} />,
+    ul: (props: any) => <ul className="my-3 list-inside list-disc pl-4 text-sm" {...props} />,
+    ol: (props: any) => <ol className="my-3 list-inside list-decimal pl-4 text-sm" {...props} />,
+    li: (props: any) => <li className="my-1 text-sm" {...props} />,
+    a: (props: any) => <a className="text-primary-600 hover:underline dark:text-primary-400" {...props} />,
+    blockquote: (props: any) => (
+      <blockquote
+        className="border-l-4 border-gray-200 py-1 pl-4 text-sm text-gray-700 dark:border-gray-700 dark:text-gray-300"
+        {...props}
+      />
+    ),
+    table: (props: any) => (
+      <div className="my-4 overflow-x-auto">
+        <table className="w-full border-collapse text-xs" {...props} />
+      </div>
+    ),
+    thead: (props: any) => <thead className="bg-gray-50 dark:bg-gray-800" {...props} />,
+    tbody: (props: any) => <tbody {...props} />,
+    tr: (props: any) => <tr className="border-b border-gray-200 dark:border-gray-700" {...props} />,
+    th: (props: any) => <th className="p-2 text-left text-xs font-medium" {...props} />,
+    td: (props: any) => <td className="p-2 text-xs" {...props} />,
   };
 
-  return <Component components={components} />;
+  return (
+    <div className="mdx-container text-gray-800 dark:text-gray-200">
+      <Component components={components} />
+    </div>
+  );
 }

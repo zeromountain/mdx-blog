@@ -1,7 +1,6 @@
 'use client';
 
 import { allPosts } from 'contentlayer/generated';
-import { X } from 'lucide-react';
 
 import { notFound } from 'next/navigation';
 
@@ -13,7 +12,6 @@ import PostCardSkeleton from './_components/post-card-skeleton';
 export default function PostPage() {
   return (
     <div className="container mx-auto px-4 py-8">
-      <h1 className="mb-8 text-3xl font-bold">블로그</h1>
       <Suspense
         fallback={
           <>
@@ -33,85 +31,74 @@ export default function PostPage() {
 }
 
 function Posts() {
-  // 모든 포스트에서 고유한 태그 목록 추출
-  const allTags = Array.from(
-    new Set(allPosts.filter((post) => post.status === 'Live').flatMap((post) => post.tags)),
-  ).sort();
+  // 모든 포스트에서 고유한 카테고리 목록 추출
+  const allCategories = Array.from(
+    new Set(allPosts.filter((post) => post.status === 'Live').map((post) => post.category)),
+  )
+    .filter(Boolean)
+    .sort() as string[];
 
   const [selectedTags, setSelectedTags] = useState<string[]>([]);
+  const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
   const [filteredPosts, setFilteredPosts] = useState(allPosts);
 
-  // 태그 선택/해제 처리
-  const toggleTag = (tag: string) => {
-    setSelectedTags((prev) => (prev.includes(tag) ? prev.filter((t) => t !== tag) : [...prev, tag]));
+  // 카테고리 선택 처리
+  const selectCategory = (category: string | null) => {
+    setSelectedCategory(category);
   };
 
-  // 선택된 태그에 따라 포스트 필터링
+  // 선택된 태그 및 카테고리에 따라 포스트 필터링
   useEffect(() => {
     const filtered = allPosts
       .filter((post) => post.status === 'Live')
-      .filter((post) => selectedTags.length === 0 || selectedTags.some((tag) => post.tags.includes(tag)))
+      .filter(
+        (post) =>
+          (selectedTags.length === 0 || selectedTags.some((tag) => post.tags.includes(tag))) &&
+          (selectedCategory === null || post.category === selectedCategory),
+      )
       .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
 
     setFilteredPosts(filtered);
-  }, [selectedTags]);
+  }, [selectedTags, selectedCategory]);
 
   // 모든 필터 초기화
-  const clearAllTags = () => {
+  const clearAllFilters = () => {
     setSelectedTags([]);
+    setSelectedCategory(null);
   };
 
   if (!allPosts || allPosts.length === 0) return notFound();
 
   return (
     <>
-      {/* 태그 필터 UI */}
-      <div className="mb-8">
+      {/* 카테고리 필터 UI */}
+      <div className="mb-6">
         <div className="flex flex-wrap items-center gap-2">
-          <span className="mr-2 font-medium text-gray-700 dark:text-gray-300">태그 필터:</span>
-          {allTags.map((tag) => (
+          <span className="mr-2 font-medium text-gray-700 dark:text-gray-300">카테고리:</span>
+          <button
+            onClick={() => selectCategory(null)}
+            className={`rounded-full px-3 py-1 text-sm transition-colors ${
+              selectedCategory === null
+                ? 'bg-primary-600 text-white'
+                : 'bg-gray-100 text-gray-800 hover:bg-gray-200 dark:bg-gray-800 dark:text-gray-200 dark:hover:bg-gray-700'
+            }`}
+          >
+            전체
+          </button>
+          {allCategories.map((category) => (
             <button
-              key={tag}
-              onClick={() => toggleTag(tag)}
+              key={category}
+              onClick={() => selectCategory(category)}
               className={`rounded-full px-3 py-1 text-sm transition-colors ${
-                selectedTags.includes(tag)
+                selectedCategory === category
                   ? 'bg-primary-600 text-white'
                   : 'bg-gray-100 text-gray-800 hover:bg-gray-200 dark:bg-gray-800 dark:text-gray-200 dark:hover:bg-gray-700'
               }`}
             >
-              {tag}
+              {category}
             </button>
           ))}
-          {selectedTags.length > 0 && (
-            <button
-              onClick={clearAllTags}
-              className="ml-2 flex items-center gap-1 rounded-full border border-gray-300 bg-white px-3 py-1 text-xs text-gray-600 transition-colors hover:bg-gray-50 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-300 dark:hover:bg-gray-700"
-            >
-              <X className="h-3 w-3" /> 초기화
-            </button>
-          )}
         </div>
-
-        {/* 선택된 태그 표시 */}
-        {selectedTags.length > 0 && (
-          <div className="mt-4 flex flex-wrap items-center gap-2">
-            <span className="text-sm text-gray-500 dark:text-gray-400">선택된 태그:</span>
-            {selectedTags.map((tag) => (
-              <span
-                key={tag}
-                className="flex items-center gap-1 rounded-full bg-primary-100 px-3 py-1 text-xs text-primary-800 dark:bg-primary-900/30 dark:text-primary-300"
-              >
-                {tag}
-                <button
-                  onClick={() => toggleTag(tag)}
-                  className="ml-1 rounded-full p-0.5 hover:bg-primary-200 dark:hover:bg-primary-800"
-                >
-                  <X className="h-3 w-3" />
-                </button>
-              </span>
-            ))}
-          </div>
-        )}
       </div>
 
       {/* 포스트 목록 */}
@@ -120,9 +107,9 @@ function Posts() {
           filteredPosts.map((post) => <PostCard key={post._id} post={post} />)
         ) : (
           <div className="col-span-full py-8 text-center text-gray-500 dark:text-gray-400">
-            <p>선택한 태그에 해당하는 포스트가 없습니다.</p>
+            <p>선택한 필터에 해당하는 포스트가 없습니다.</p>
             <button
-              onClick={clearAllTags}
+              onClick={clearAllFilters}
               className="mt-2 font-medium text-primary-600 hover:underline dark:text-primary-400"
             >
               모든 포스트 보기
