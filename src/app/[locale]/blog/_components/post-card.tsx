@@ -1,47 +1,42 @@
 'use client';
 
-import dayjs from 'dayjs';
+import { Post } from 'contentlayer/generated';
+import { format } from 'date-fns';
 
-import Image from 'next/image';
-import Link from 'next/link';
-import { useParams } from 'next/navigation';
+import { Card } from '@nextui-org/card';
+import { Chip } from '@nextui-org/chip';
 
-import { Locale } from '@/types/locale';
-import { IPost } from '@/types/post';
+import { Link } from '@/app/i18n/routing';
 
-import TagChip from './tag-chip';
-
-type PostCardProps = {
-  post: IPost;
-};
+interface PostCardProps {
+  post: Post;
+}
 
 export default function PostCard({ post }: PostCardProps) {
-  const params = useParams();
-  const locale = params.locale as Locale;
-  const { id, cover, title, publishTime, icon, tags } = post;
+  // URL에서 /blog/ 부분 이후만 추출 (slug)
+  const slug = post.url.replace('/blog/', '');
 
   return (
-    <Link href={`/${locale}/blog/${id}`} className="block h-min">
-      <article className="clickable w-320 flex flex-col items-center rounded-sm shadow-lg hover:-translate-x-1 hover:-translate-y-1">
-        <div className={`relative`}>
-          {cover && <Image src={cover} alt="cover" width={320} height={200} style={{ width: 320, height: 200 }} />}
-          <p className="absolute left-1/2 top-1/2 w-full -translate-x-1/2 -translate-y-1/2 break-words text-center text-lg font-bold text-white">
-            {title}
-          </p>
-        </div>
-        <div className="flex w-full flex-col items-center gap-4">
-          <time className="text-14 self-end p-4">{dayjs(publishTime).format('YYYY.MM.DD')}</time>
-          <Image src={icon} alt="icon" width={24} height={24} />
-          <h2 className="w-full truncate px-12 text-center font-bold">{title}</h2>
-          {tags.length > 0 && (
-            <div className="flex flex-wrap gap-4 py-6">
-              {tags.map(({ id, name, color }: any) => (
-                <TagChip key={id} name={name} color={color} />
+    <Link href={`/blog/${slug}`} className="block">
+      <Card className="h-full p-5 hover:bg-default-50">
+        <div className="flex h-full flex-col justify-between">
+          <div>
+            <div className="mb-4 flex">
+              {post.tags.map((tag) => (
+                <Chip key={tag} className="mr-2 bg-primary-100 text-xs text-primary-800">
+                  {tag}
+                </Chip>
               ))}
             </div>
-          )}
+            <h3 className="mb-2 text-xl font-semibold text-gray-900 dark:text-gray-100">{post.title}</h3>
+            <p className="text-xs text-gray-500">{post.description}</p>
+          </div>
+          <div className="mt-4 flex flex-row items-center justify-between">
+            <p className="text-xs text-gray-500">{format(new Date(post.date), 'yyyy.MM.dd')}</p>
+            <p className="text-xs text-gray-500">{post.readingTime.text}</p>
+          </div>
         </div>
-      </article>
+      </Card>
     </Link>
   );
 }
