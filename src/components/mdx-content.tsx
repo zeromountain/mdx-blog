@@ -48,6 +48,13 @@ const CustomImage = ({ src, alt, width, height, ...rest }: CustomImageProps) => 
           maxHeight: '500px',
           objectFit: 'contain',
         }}
+        unoptimized
+        onError={(e) => {
+          // 이미지 로드 실패 시 기본 이미지 표시
+          const target = e.target as HTMLImageElement;
+          target.src = '/projects/project-default.png';
+          target.onerror = null; // 무한 루프 방지
+        }}
         {...rest}
       />
       {alt && <p className="mt-2 text-center text-sm text-gray-500 dark:text-gray-400">{alt}</p>}

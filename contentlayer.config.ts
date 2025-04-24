@@ -50,11 +50,18 @@ export const About = defineDocumentType(() => ({
     description: { type: 'string' },
     order: { type: 'number', required: true }, // 표시 순서
     section: { type: 'string', required: true }, // 섹션 구분 (profile, skills, experience, projects)
+    techStack: { type: 'list', of: { type: 'string' }, default: [] }, // 기술 스택
+    thumbnail: { type: 'string' }, // 썸네일 이미지 경로
   },
   computedFields: {
     slug: {
       type: 'string',
-      resolve: (doc) => doc._raw.sourceFileName.replace(/\.mdx$/, ''),
+      resolve: (doc) => {
+        // 폴더 경로를 포함한 slug 생성
+        const pathWithoutFileExtension = doc._raw.flattenedPath.replace(/\.mdx$/, '');
+        const pathSegments = pathWithoutFileExtension.split('/');
+        return pathSegments.slice(1).join('/'); // about/ 이후의 경로를 사용
+      },
     },
   },
 }));

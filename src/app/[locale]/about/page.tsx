@@ -1,5 +1,12 @@
+'use client';
+
+import { allAbouts } from 'contentlayer/generated';
+
 import Image from 'next/image';
 import Link from 'next/link';
+import { useParams } from 'next/navigation';
+
+import { useMemo } from 'react';
 
 import EmailIcon from '@/assets/icon/email-icon';
 import GithubIcon from '@/assets/icon/github-icon';
@@ -40,62 +47,88 @@ function ProfileContent() {
 
 // 포트폴리오 콘텐츠 컴포넌트
 function PortfolioContent() {
-  const portfolioItems = [
-    {
-      id: 1,
-      title: '노션 블로그',
-      description: 'Next.js와 노션 API를 활용한 개인 블로그 프로젝트',
-      techStack: ['Next.js', 'TypeScript', 'Tailwind CSS', 'Notion API'],
-      link: 'https://github.com/zeromountain/notion-blog',
-      thumbnail: '/projects/notion-blog.png',
-    },
-    {
-      id: 2,
-      title: '웹 포트폴리오',
-      description: '개인 포트폴리오 웹사이트',
-      techStack: ['React', 'Next.js', 'TypeScript', 'Tailwind CSS'],
-      link: 'https://github.com/zeromountain/portfolio',
-      thumbnail: '/projects/portfolio.png',
-    },
-    {
-      id: 3,
-      title: '개인 프로젝트',
-      description: '진행 중인 사이드 프로젝트',
-      techStack: ['React', 'TypeScript', 'Styled Components'],
-      link: '#',
-      thumbnail: '/projects/project-default.png',
-    },
-  ];
+  // 현재 로케일 가져오기
+  const params = useParams();
+  const locale = params.locale as string;
+
+  // contentlayer에서 프로젝트 섹션의 MDX 파일들을 가져옵니다
+  const projectItems = useMemo(() => {
+    // 디버깅용 로깅
+    console.log(
+      'Available projects:',
+      allAbouts.filter((about) => about.section === 'projects').map((p) => ({ title: p.title, slug: p.slug })),
+    );
+
+    return allAbouts
+      .filter((about) => about.section === 'projects')
+      .sort((a, b) => (a.order || 999) - (b.order || 999))
+      .map((project, index) => {
+        // 기본 기술 스택 - 메타데이터에 정의되지 않은 경우 사용
+        const defaultTechStack = ['Next.js', 'React', 'TypeScript'];
+
+        // 프로젝트 링크 생성 (로케일 경로 포함)
+        const projectLink = `/${locale}/about/projects/${project.slug.split('/').pop()}`;
+
+        // 썸네일 이미지 경로 생성
+        const thumbnail = project.thumbnail || `/projects/${project.slug.split('/').pop()}.png`;
+
+        return {
+          id: index + 1,
+          title: project.title,
+          description: project.description || '프로젝트 설명이 준비 중입니다.',
+          techStack: (project.techStack || defaultTechStack) as string[],
+          link: projectLink,
+          thumbnail: thumbnail,
+        };
+      });
+  }, [locale]);
 
   return (
     <div className="prose prose-lg w-full dark:prose-invert">
       <div className="grid w-full grid-cols-1 gap-6 md:grid-cols-2">
-        {portfolioItems.map((item) => (
+        {projectItems.map((item) => (
           <div
             key={item.id}
-            className="overflow-hidden rounded-lg border border-gray-200 transition-shadow hover:shadow-md dark:border-gray-800"
+            className="flex flex-col overflow-hidden rounded-lg border border-gray-200 transition-shadow hover:shadow-md dark:border-gray-800"
           >
+            {/* 썸네일 이미지 영역 */}
             <div className="relative h-48 w-full bg-gray-100 dark:bg-gray-800">
-              <Image src={item.thumbnail} alt={item.title} fill className="object-cover" />
+              <Image
+                src={item.thumbnail}
+                alt={item.title}
+                fill
+                className="object-cover"
+                unoptimized
+                onError={(e) => {
+                  const target = e.target as HTMLImageElement;
+                  target.src = '/projects/project-default.png';
+                  target.onerror = null; // 무한 루프 방지
+                }}
+              />
             </div>
-            <div className="p-4">
+
+            {/* 프로젝트 정보 영역 */}
+            <div className="relative flex flex-1 flex-col bg-white p-4 dark:bg-gray-900">
+              {/* 프로젝트 제목 및 설명 */}
               <h3 className="mt-0 text-lg font-medium">{item.title}</h3>
               <p className="mt-1 text-sm text-gray-600 dark:text-gray-400">{item.description}</p>
-              <div className="mt-2 flex flex-wrap gap-2">
+
+              {/* 프로젝트 링크 */}
+              <Link
+                href={item.link.startsWith('http') ? item.link : item.link}
+                target={item.link.startsWith('http') ? '_blank' : undefined}
+                className="mt-3 inline-flex items-center text-sm font-medium text-blue-600 hover:underline dark:text-blue-400"
+              >
+                프로젝트 보기 <span className="ml-1">→</span>
+              </Link>
+
+              {/* 기술 스택 태그 */}
+              <div className="mt-4 flex flex-wrap gap-2 border-t border-gray-100 pt-3 dark:border-gray-800">
                 {item.techStack.map((tech) => (
                   <span key={tech} className="rounded-md bg-gray-100 px-2 py-1 text-xs dark:bg-gray-800">
                     {tech}
                   </span>
                 ))}
-              </div>
-              <div className="mt-3">
-                <Link
-                  href={item.link}
-                  target="_blank"
-                  className="text-sm font-medium text-blue-600 hover:underline dark:text-blue-400"
-                >
-                  프로젝트 보기 →
-                </Link>
               </div>
             </div>
           </div>
