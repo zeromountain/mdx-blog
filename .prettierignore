@@ -1,0 +1,26 @@
+# 빌드 출력
+.next/
+out/
+dist/
+build/
+
+# 종속성
+node_modules/
+
+# 로그
+*.log
+
+# 환경변수 파일
+.env*
+
+# 컨텐츠 레이어
+.contentlayer/
+
+# MDX 파일
+*.mdx
+content/**/*.mdx
+
+# 기타 무시할 파일
+.DS_Store
+.idea/
+.vscode/ 

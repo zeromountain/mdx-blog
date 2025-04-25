@@ -18,5 +18,14 @@
     "^.+\\.css$"
   ],
   "importOrderSeparation": true,
-  "importOrderSortSpecifiers": true
+  "importOrderSortSpecifiers": true,
+  "overrides": [
+    {
+      "files": "*.mdx",
+      "options": {
+        "parser": "markdown",
+        "requirePragma": true
+      }
+    }
+  ]
 }

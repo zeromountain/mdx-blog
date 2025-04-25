@@ -7,7 +7,7 @@
     "node": true,
     "es6": true
   },
-  "ignorePatterns": ["node_modules/*", ".next/*", "out/*", "!.prettierrc"],
+  "ignorePatterns": ["node_modules/*", ".next/*", "out/*", "!.prettierrc", "content/*"],
   "extends": ["next/core-web-vitals", "next/typescript", "plugin:@typescript-eslint/recommended", "prettier"],
   "rules": {
     "no-var": "error",

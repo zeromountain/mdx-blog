@@ -177,14 +177,14 @@ export function MDXContent({ code }: MDXContentProps) {
     ),
     table: (props: any) => (
       <div className="my-4 overflow-x-auto">
-        <table className="w-full border-collapse text-xs" {...props} />
+        <table className="w-full min-w-full border-collapse rounded-md text-sm" {...props} />
       </div>
     ),
     thead: (props: any) => <thead className="bg-gray-50 dark:bg-gray-800" {...props} />,
     tbody: (props: any) => <tbody {...props} />,
     tr: (props: any) => <tr className="border-b border-gray-200 dark:border-gray-700" {...props} />,
-    th: (props: any) => <th className="p-2 text-left text-xs font-medium" {...props} />,
-    td: (props: any) => <td className="p-2 text-xs" {...props} />,
+    th: (props: any) => <th className="p-3 text-left font-medium text-gray-700 dark:text-gray-300" {...props} />,
+    td: (props: any) => <td className="p-3 text-gray-600 dark:text-gray-400" {...props} />,
   };
 
   return (
