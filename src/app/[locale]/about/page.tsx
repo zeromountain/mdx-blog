@@ -25,22 +25,6 @@ function ProfileContent() {
         <br />
         UI/UX와 DX를 고려하여 기획 내용을 구현하는 것을 중요하게 생각합니다.
       </p>
-      <h2>연락처</h2>
-      <ul>
-        <li>
-          GitHub:{' '}
-          <a href="https://github.com/zeromountain" target="_blank" rel="noopener noreferrer">
-            github.com/zeromountain
-          </a>
-        </li>
-        <li>
-          LinkedIn:{' '}
-          <a href="https://www.linkedin.com/in/yeongsan-son-b289551b0/" target="_blank" rel="noopener noreferrer">
-            linkedin.com/in/yeongsan-son-b289551b0/
-          </a>
-        </li>
-        <li>Email: yeongsan.mountain@gmail.com</li>
-      </ul>
     </div>
   );
 }
