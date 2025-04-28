@@ -1,45 +1,66 @@
 'use client';
 
-import { motion } from 'framer-motion';
-import { useTranslations } from 'next-intl';
+import { gsap } from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+import { useEffect, useState } from 'react';
+
+import AboutSection from '@/components/about-section';
+import BallTrajectory from '@/components/ball-trajectory';
+import BouncingBall from '@/components/bouncing-ball';
+import ContactSection from '@/components/contact-section';
+import FieldBackground from '@/components/field-background';
+import GoalAnimation from '@/components/goal-animation';
+import HeroSection from '@/components/hero-section';
+import PlayerSilhouettes from '@/components/player-silhouettes';
+import ProjectsSection from '@/components/projects-section';
+import Scoreboard from '@/components/soccerboard';
+import SoccerBallCursor from '@/components/soccoer-ball-cursor';
+
+// GSAP 플러그인 등록
+gsap.registerPlugin(ScrollTrigger);
 
 export default function Home() {
-  const t = useTranslations('common');
+  const [cursorPosition, setCursorPosition] = useState({ x: 0, y: 0 });
+
+  useEffect(() => {
+    const loadingTimeline = gsap.timeline();
+
+    loadingTimeline.from('.content', { opacity: 0, duration: 0.5 });
+
+    const handleMouseMove = (e: MouseEvent) => {
+      setCursorPosition({ x: e.clientX, y: e.clientY });
+    };
+
+    window.addEventListener('mousemove', handleMouseMove);
+
+    return () => {
+      window.removeEventListener('mousemove', handleMouseMove);
+    };
+  }, []);
+
   return (
-    <div className="flex h-[calc(100vh-60px)] flex-col items-center justify-center bg-gradient-to-b">
-      <motion.section
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 2 }}
-        className="text-center"
-      >
-        <motion.h1
-          className="mb-4 text-4xl font-bold md:text-6xl"
-          initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.2 }}
-        >
-          {t('greeting')} <span className="inline-block animate-wave">👋</span>
-        </motion.h1>
+    <main className="relative min-h-screen w-full overflow-hidden bg-[#0a0a0a] text-white">
+      {/* 배경 요소들 */}
+      <div className="fixed inset-0 z-0">
+        <FieldBackground />
+        <PlayerSilhouettes />
+        <BouncingBall />
+        <BallTrajectory />
+        <GoalAnimation />
+        <Scoreboard />
+      </div>
 
-        <motion.h2
-          className="mb-6 text-2xl text-gray-300 md:text-3xl"
-          initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.4 }}
-        >
-          {t('subtitle')}
-        </motion.h2>
+      {/* 커스텀 축구공 커서 */}
+      {/* <SoccerBallCursor position={cursorPosition} /> */}
 
-        <motion.p
-          className="mx-auto max-w-2xl whitespace-pre-line text-lg text-gray-400 md:text-xl"
-          initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, delay: 0.6 }}
-        >
-          {t('description')}
-        </motion.p>
-      </motion.section>
-    </div>
+      {/* 메인 콘텐츠 */}
+      <div className="content relative z-10 min-h-screen w-full overflow-y-auto">
+        <HeroSection />
+        <AboutSection />
+        <ProjectsSection />
+        <ContactSection />
+      </div>
+    </main>
   );
 }

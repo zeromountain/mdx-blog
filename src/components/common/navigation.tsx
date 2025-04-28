@@ -3,6 +3,8 @@
 import Link from 'next/link';
 import { useParams, usePathname } from 'next/navigation';
 
+import { useEffect, useRef } from 'react';
+
 import { Navbar, NavbarContent, NavbarItem } from '@nextui-org/navbar';
 
 import { cn } from '@/lib/utils';
@@ -35,6 +37,8 @@ export default function Navigation() {
   const params = useParams();
   const locale = params.locale as Locale;
 
+  const headerRef = useRef<HTMLDivElement>(null);
+
   // 현재 경로가 해당 링크의 경로와 일치하는지 확인하는 함수
   const isActive = (href: string) => {
     // 홈 페이지(/)인 경우
@@ -49,8 +53,33 @@ export default function Navigation() {
     return false;
   };
 
+  useEffect(() => {
+    // 헤더 애니메이션
+    gsap.from(headerRef.current, {
+      y: -100,
+      opacity: 0,
+      duration: 0.8,
+      delay: 0.5,
+      ease: 'power3.out',
+    });
+
+    // 스크롤 이벤트에 따른 헤더 스타일 변경
+    const handleScroll = () => {
+      if (window.scrollY > 50) {
+        headerRef.current?.classList.add('bg-black/80', 'backdrop-blur-md');
+        headerRef.current?.classList.remove('bg-transparent');
+      } else {
+        headerRef.current?.classList.remove('bg-black/80', 'backdrop-blur-md');
+        headerRef.current?.classList.add('bg-transparent');
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
   return (
-    <Navbar isBlurred isBordered>
+    <Navbar ref={headerRef} isBlurred isBordered>
       <NavbarContent>
         {links.map((link) => (
           <NavbarItem key={link.href}>
