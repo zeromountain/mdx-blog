@@ -13,22 +13,13 @@ interface MDXContentProps {
   code: string;
 }
 
-// 이미지 컴포넌트 타입 정의
-interface CustomImageProps {
-  src: string;
-  alt?: string;
-  width?: number;
-  height?: number;
-  [key: string]: any; // 기타 props 타입 정의
-}
-
 // 로컬 이미지인지 확인하는 함수
 const isLocalImage = (src: string) => {
   return !src.startsWith('http') && !src.startsWith('https') && !src.startsWith('//');
 };
 
 // 이미지 컴포넌트
-const CustomImage = ({ src, alt, width, height, ...rest }: CustomImageProps) => {
+const CustomImage = ({ src, alt, width, height, ...rest }: JSX.IntrinsicElements['img']) => {
   if (!src) return null;
 
   // 로컬 이미지 경로 처리
@@ -39,8 +30,8 @@ const CustomImage = ({ src, alt, width, height, ...rest }: CustomImageProps) => 
       <NextImage
         src={imgSrc}
         alt={alt || ''}
-        width={width || 800}
-        height={height || 450}
+        width={Number(width) || 800}
+        height={Number(height) || 450}
         className="transition-transform duration-500 ease-in-out hover:scale-105"
         style={{
           width: '100%',
@@ -124,8 +115,8 @@ export function MDXContent({ code }: MDXContentProps) {
   const Component = useMemo(() => getMDXComponent(code), [code]);
 
   const components = {
-    pre: (props: any) => <>{props.children}</>,
-    code: (props: any) => {
+    pre: (props: JSX.IntrinsicElements['pre']) => <>{props.children}</>,
+    code: (props: JSX.IntrinsicElements['code']) => {
       const { className, children } = props;
       // 인라인 코드인지 코드 블록인지 확인
       const isInlineCode = !className;
@@ -139,12 +130,12 @@ export function MDXContent({ code }: MDXContentProps) {
 
       return <CodeBlock className={className}>{children}</CodeBlock>;
     },
-    img: (props: any) => {
+    img: (props: JSX.IntrinsicElements['img']) => {
       // key prop을 추출하여 전달하지 않음 (React 경고 방지)
       const { key, ...rest } = props; // eslint-disable-line @typescript-eslint/no-unused-vars
       return <CustomImage {...rest} />;
     },
-    p: (props: any) => {
+    p: (props: JSX.IntrinsicElements['p']) => {
       // key prop을 추출하여 전달하지 않음
       const { key, children, ...rest } = props; // eslint-disable-line @typescript-eslint/no-unused-vars
       // 자식 요소가 img 컴포넌트인 경우 p 태그를 사용하지 않음
@@ -159,32 +150,40 @@ export function MDXContent({ code }: MDXContentProps) {
         </p>
       );
     },
-    h1: (props: any) => <h1 className="mb-4 mt-8 text-3xl font-bold" {...props} />,
-    h2: (props: any) => <h2 className="mb-3 mt-6 text-2xl font-bold" {...props} />,
-    h3: (props: any) => <h3 className="mb-2 mt-5 text-xl font-semibold" {...props} />,
-    h4: (props: any) => <h4 className="mb-2 mt-4 text-lg font-semibold" {...props} />,
-    h5: (props: any) => <h5 className="mb-1 mt-3 text-base font-semibold" {...props} />,
-    h6: (props: any) => <h6 className="mb-1 mt-3 text-sm font-semibold" {...props} />,
-    ul: (props: any) => <ul className="my-3 list-inside list-disc pl-4 text-sm" {...props} />,
-    ol: (props: any) => <ol className="my-3 list-inside list-decimal pl-4 text-sm" {...props} />,
-    li: (props: any) => <li className="my-1 text-sm" {...props} />,
-    a: (props: any) => <a className="text-primary-600 hover:underline dark:text-primary-400" {...props} />,
-    blockquote: (props: any) => (
+    h1: (props: JSX.IntrinsicElements['h1']) => <h1 className="mb-4 mt-8 text-3xl font-bold" {...props} />,
+    h2: (props: JSX.IntrinsicElements['h2']) => <h2 className="mb-3 mt-6 text-2xl font-bold" {...props} />,
+    h3: (props: JSX.IntrinsicElements['h3']) => <h3 className="mb-2 mt-5 text-xl font-semibold" {...props} />,
+    h4: (props: JSX.IntrinsicElements['h4']) => <h4 className="mb-2 mt-4 text-lg font-semibold" {...props} />,
+    h5: (props: JSX.IntrinsicElements['h5']) => <h5 className="mb-1 mt-3 text-base font-semibold" {...props} />,
+    h6: (props: JSX.IntrinsicElements['h6']) => <h6 className="mb-1 mt-3 text-sm font-semibold" {...props} />,
+    ul: (props: JSX.IntrinsicElements['ul']) => <ul className="my-3 list-inside list-disc pl-4 text-sm" {...props} />,
+    ol: (props: JSX.IntrinsicElements['ol']) => (
+      <ol className="my-3 list-inside list-decimal pl-4 text-sm" {...props} />
+    ),
+    li: (props: JSX.IntrinsicElements['li']) => <li className="my-1 text-sm" {...props} />,
+    a: (props: JSX.IntrinsicElements['a']) => (
+      <a className="text-primary-600 hover:underline dark:text-primary-400" {...props} />
+    ),
+    blockquote: (props: JSX.IntrinsicElements['blockquote']) => (
       <blockquote
         className="border-l-4 border-gray-200 py-1 pl-4 text-sm text-gray-700 dark:border-gray-700 dark:text-gray-300"
         {...props}
       />
     ),
-    table: (props: any) => (
+    table: (props: JSX.IntrinsicElements['table']) => (
       <div className="my-4 overflow-x-auto">
         <table className="w-full min-w-full border-collapse rounded-md text-sm" {...props} />
       </div>
     ),
-    thead: (props: any) => <thead className="bg-gray-50 dark:bg-gray-800" {...props} />,
-    tbody: (props: any) => <tbody {...props} />,
-    tr: (props: any) => <tr className="border-b border-gray-200 dark:border-gray-700" {...props} />,
-    th: (props: any) => <th className="p-3 text-left font-medium text-gray-700 dark:text-gray-300" {...props} />,
-    td: (props: any) => <td className="p-3 text-gray-600 dark:text-gray-400" {...props} />,
+    thead: (props: JSX.IntrinsicElements['thead']) => <thead className="bg-gray-50 dark:bg-gray-800" {...props} />,
+    tbody: (props: JSX.IntrinsicElements['tbody']) => <tbody {...props} />,
+    tr: (props: JSX.IntrinsicElements['tr']) => (
+      <tr className="border-b border-gray-200 dark:border-gray-700" {...props} />
+    ),
+    th: (props: JSX.IntrinsicElements['th']) => (
+      <th className="p-3 text-left font-medium text-gray-700 dark:text-gray-300" {...props} />
+    ),
+    td: (props: JSX.IntrinsicElements['td']) => <td className="p-3 text-gray-600 dark:text-gray-400" {...props} />,
   };
 
   return (

@@ -1,6 +1,7 @@
 import { defineDocumentType, makeSource } from 'contentlayer/source-files';
 import readingTime from 'reading-time';
 import rehypeAutolinkHeadings from 'rehype-autolink-headings';
+import rehypePrettyCode from 'rehype-pretty-code';
 import rehypeSlug from 'rehype-slug';
 
 // 테이블 관련 오류로 인해 remark-gfm 플러그인은 사용하지 않습니다
@@ -75,7 +76,9 @@ export default makeSource({
       rehypeSlug,
       [
         rehypeAutolinkHeadings,
+        rehypePrettyCode,
         {
+          theme: 'github-dark',
           properties: {
             className: ['anchor'],
           },
