@@ -2,9 +2,9 @@
 
 import Link from 'next/link';
 
-import { Chip } from '@nextui-org/chip';
-import { useDisclosure } from '@nextui-org/modal';
-import { Divider } from '@nextui-org/react';
+import { Chip } from "@heroui/chip";
+import { useDisclosure } from "@heroui/modal";
+import { Divider } from "@heroui/react";
 
 import CommonModal from '@/components/common/modal';
 import { PROJECTS } from '@/constants/project';

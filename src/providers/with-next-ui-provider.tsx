@@ -1,15 +1,16 @@
+'use client';
+
+import { HeroUIProvider } from '@heroui/react';
 import { ThemeProvider } from 'next-themes';
 
 import { PropsWithChildren } from 'react';
 
-import { NextUIProvider } from '@nextui-org/react';
-
-export function WithNextUIProvider({ children }: PropsWithChildren) {
+export function WithHeroUIProvider({ children }: PropsWithChildren) {
   return (
-    <NextUIProvider>
+    <HeroUIProvider>
       <ThemeProvider attribute="class" defaultTheme="light">
         {children}
       </ThemeProvider>
-    </NextUIProvider>
+    </HeroUIProvider>
   );
 }

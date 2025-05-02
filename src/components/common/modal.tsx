@@ -4,7 +4,7 @@ import { useRouter } from 'next/navigation';
 
 import { PropsWithChildren } from 'react';
 
-import { Modal, ModalBody, ModalContent, ModalProps } from '@nextui-org/modal';
+import { Modal, ModalBody, ModalContent, ModalProps } from "@heroui/modal";
 
 export default function CommonModal({ children, onClose, ...props }: PropsWithChildren<ModalProps>) {
   const router = useRouter();

@@ -112,6 +112,7 @@ const CodeBlock = ({ className, children }: CodeBlockProps) => {
 };
 
 export function MDXContent({ code }: MDXContentProps) {
+  console.log({ code });
   const Component = useMemo(() => getMDXComponent(code), [code]);
 
   const components = {

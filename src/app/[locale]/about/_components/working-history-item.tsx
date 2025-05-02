@@ -1,4 +1,4 @@
-import { Chip } from '@nextui-org/chip';
+import { Chip } from '@heroui/chip';
 
 interface WorkingHistoryItemProps {
   company: string;

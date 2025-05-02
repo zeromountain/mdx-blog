@@ -3,8 +3,8 @@
 import { Post } from 'contentlayer/generated';
 import { format } from 'date-fns';
 
-import { Card } from '@nextui-org/card';
-import { Chip } from '@nextui-org/chip';
+import { Card } from "@heroui/card";
+import { Chip } from "@heroui/chip";
 
 import { Link } from '@/app/i18n/routing';
 

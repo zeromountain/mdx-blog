@@ -9,7 +9,7 @@ import 'react-notion-x/src/styles.css';
 
 import Navigation from '@/components/common/navigation';
 import { HomeLayout } from '@/components/layouts/home-layouts';
-import { WithNextUIProvider } from '@/providers/with-next-ui-provider';
+import { WithHeroUIProvider } from '@/providers/with-next-ui-provider';
 
 import { routing } from '../i18n/routing';
 import './globals.css';
@@ -51,12 +51,12 @@ export default async function RootLayout({
   return (
     <html lang={locale}>
       <body className={`${geistSans.variable} ${geistMono.variable} overflow-hidden antialiased`}>
-        <WithNextUIProvider>
+        <WithHeroUIProvider>
           <NextIntlClientProvider messages={messages}>
             <Navigation />
             <HomeLayout>{children}</HomeLayout>
           </NextIntlClientProvider>
-        </WithNextUIProvider>
+        </WithHeroUIProvider>
       </body>
     </html>
   );

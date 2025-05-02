@@ -2,7 +2,7 @@
 
 import { useRouter } from 'next/navigation';
 
-import { Button } from '@nextui-org/button';
+import { Button } from "@heroui/button";
 
 export const BackButton = () => {
   const router = useRouter();

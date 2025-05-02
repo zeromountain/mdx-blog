@@ -1,5 +1,3 @@
-'use client';
-
 import { allPosts } from 'contentlayer/generated';
 
 import { notFound } from 'next/navigation';
