@@ -1,4 +1,4 @@
-import { Tooltip } from '@nextui-org/tooltip';
+import { Tooltip } from '@heroui/tooltip';
 
 interface SkillItemProps {
   name: string;
@@ -6,5 +6,9 @@ interface SkillItemProps {
 }
 
 export default function SkillItem({ name, icon }: SkillItemProps) {
-  return <Tooltip placement="bottom" content={name}>{icon}</Tooltip>;
+  return (
+    <Tooltip placement="bottom" content={name}>
+      {icon}
+    </Tooltip>
+  );
 }
