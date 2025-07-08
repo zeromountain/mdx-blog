@@ -1,10 +1,10 @@
 'use client';
 
-import Link from 'next/link';
 import { useParams, usePathname } from 'next/navigation';
 
 import { Navbar, NavbarContent, NavbarItem } from "@heroui/navbar";
 
+import { Link } from '@/app/i18n/routing';
 import { cn } from '@/lib/utils';
 
 import LanguageSwitcher from './language-switcher';
@@ -55,12 +55,12 @@ export default function Navigation() {
   };
 
   return (
-    <Navbar isBlurred isBordered>
+    <Navbar isBlurred isBordered className="z-100">
       <NavbarContent>
         {links.map((link) => (
           <NavbarItem key={link.href}>
             <Link
-              href={`/${locale}${link.href}`}
+              href={link.href}
               className={cn(
                 'rounded-md px-3 py-1 transition-colors',
                 isActive(link.href) ? 'bg-primary font-bold text-primary-foreground' : 'hover:bg-primary/10',
