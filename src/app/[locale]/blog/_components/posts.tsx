@@ -2,8 +2,6 @@
 
 import { allPosts } from 'contentlayer/generated';
 
-import { notFound } from 'next/navigation';
-
 import { useEffect, useState } from 'react';
 
 import PostCard from './post-card';
@@ -45,7 +43,7 @@ export default function Posts() {
     setSelectedCategory(null);
   };
 
-  if (!allPosts || allPosts.length === 0) return notFound();
+  // if (!allPosts || allPosts.length === 0) return notFound();
 
   return (
     <>
