@@ -1,23 +1,23 @@
 import fs from 'fs';
 import matter from 'gray-matter';
 import path from 'path';
+import readingTime from 'reading-time';
 import { remark } from 'remark';
 import remarkGfm from 'remark-gfm';
 import remarkHtml from 'remark-html';
-
-import { ITag } from '@/types/post';
 
 export interface MarkdownPost {
   id: string;
   title: string;
   content: string;
-  tags: ITag[];
+  tags: string[];
   cover: string;
   icon: string;
   publishTime: string;
   slug: string;
   status: string;
-  readingTime?: number;
+  readingTime: number;
+  description: string;
 }
 
 export interface PostMetadata {
@@ -63,25 +63,20 @@ export function createMarkdownPost(filePath: string): MarkdownPost {
   const { metadata, content } = parseMarkdownFile(filePath);
   const fileName = path.basename(filePath, '.md');
 
-  // Convert tag strings to ITag objects
-  const tags: ITag[] =
-    metadata.tags?.map((tagName: string, index: number) => ({
-      id: `tag-${index}`,
-      name: tagName,
-      color: 'default',
-      description: '',
-    })) || [];
+  const _readingTime = Math.ceil(readingTime(content).minutes);
 
   return {
     id: fileName,
     title: metadata.title || fileName,
     content,
-    tags,
+    tags: metadata.tags || [],
     cover: metadata.cover || '/default.webp',
     icon: metadata.icon || '/mascot.webp',
     publishTime: metadata.date || new Date().toISOString(),
     slug: fileName,
     status: metadata.status || 'Draft',
+    description: metadata.description || '',
+    readingTime: _readingTime,
   };
 }
 
@@ -146,20 +141,20 @@ export function getMarkdownPostBySlug(directory: string, slug: string): Markdown
  */
 export function getPostsByTag(directory: string, tagName: string): MarkdownPost[] {
   const posts = getAllMarkdownPosts(directory);
-  return posts.filter((post) => post.tags.some((tag) => tag.name.toLowerCase() === tagName.toLowerCase()));
+  return posts.filter((post) => post.tags.some((tag) => tag.toLowerCase() === tagName.toLowerCase()));
 }
 
 /**
  * Get all unique tags from posts
  */
-export function getAllTags(directory: string): ITag[] {
+export function getAllTags(directory: string): string[] {
   const posts = getAllMarkdownPosts(directory);
-  const tagMap = new Map<string, ITag>();
+  const tagMap = new Map<string, string>();
 
   posts.forEach((post) => {
     post.tags.forEach((tag) => {
-      if (!tagMap.has(tag.name)) {
-        tagMap.set(tag.name, tag);
+      if (!tagMap.has(tag)) {
+        tagMap.set(tag, tag);
       }
     });
   });

@@ -1,6 +1,5 @@
 'use client';
 
-import { Post } from 'contentlayer/generated';
 import { format } from 'date-fns';
 import { ArrowLeft, ArrowUp } from 'lucide-react';
 
@@ -9,11 +8,12 @@ import { useEffect, useState } from 'react';
 import { Link } from '@/app/i18n/routing';
 import PostBody from '@/components/post/post-body';
 import PostHeader from '@/components/post/post-header';
+import { MarkdownPost } from '@/lib/post';
 
 interface PostNavigationProps {
-  post: Post;
-  prevPost: Post | null;
-  nextPost: Post | null;
+  post: MarkdownPost;
+  prevPost: MarkdownPost | null;
+  nextPost: MarkdownPost | null;
 }
 
 export default function PostNavigation({ post, prevPost, nextPost }: PostNavigationProps) {
@@ -84,15 +84,15 @@ export default function PostNavigation({ post, prevPost, nextPost }: PostNavigat
       {/* 헤더 섹션 */}
       <PostHeader
         title={post.title}
-        categoryPath={post.category}
-        date={post.date}
-        readingTime={post.readingTime.text}
+        categoryPath={post.tags.join(', ')}
+        date={post.publishTime}
+        readingTime={post.readingTime.toString()}
       />
 
       {/* 블로그 컨텐츠 */}
       <article className="prose prose-lg mx-auto max-w-none dark:prose-invert prose-headings:font-bold prose-headings:text-gray-900 prose-a:text-primary-600 prose-code:rounded-md prose-code:bg-gray-100 prose-code:p-1 prose-code:font-normal prose-code:text-primary-700 prose-pre:overflow-x-auto prose-pre:rounded-lg prose-img:rounded-lg dark:prose-headings:text-gray-100 dark:prose-a:text-primary-400 dark:prose-code:bg-gray-800 dark:prose-code:text-primary-400">
         {/* <MDXContent code={post.body.code} /> */}
-        <PostBody content={post.body.code} />
+        <PostBody content={post.content} />
       </article>
 
       {/* 이전/다음 포스트 네비게이션 */}
@@ -107,7 +107,7 @@ export default function PostNavigation({ post, prevPost, nextPost }: PostNavigat
               <span className="mb-2 text-lg font-medium text-gray-900 transition-colors group-hover:text-primary-700 dark:text-gray-100 dark:group-hover:text-primary-400">
                 {prevPost.title}
               </span>
-              <span className="text-sm text-gray-500 dark:text-gray-400">{formatDate(prevPost.date)}</span>
+              <span className="text-sm text-gray-500 dark:text-gray-400">{formatDate(prevPost.publishTime)}</span>
             </Link>
           )}
 
@@ -120,7 +120,7 @@ export default function PostNavigation({ post, prevPost, nextPost }: PostNavigat
               <span className="mb-2 text-lg font-medium text-gray-900 transition-colors group-hover:text-primary-700 dark:text-gray-100 dark:group-hover:text-primary-400">
                 {nextPost.title}
               </span>
-              <span className="text-sm text-gray-500 dark:text-gray-400">{formatDate(nextPost.date)}</span>
+              <span className="text-sm text-gray-500 dark:text-gray-400">{formatDate(nextPost.publishTime)}</span>
             </Link>
           )}
         </div>
