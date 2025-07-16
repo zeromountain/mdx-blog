@@ -25,7 +25,7 @@ export interface PostMetadata {
   tags: string[];
   cover?: string;
   icon?: string;
-  publishTime: string;
+  date: string;
   [key: string]: any;
 }
 
@@ -38,6 +38,8 @@ export function parseMarkdownFile(filePath: string): {
 } {
   const fileContents = fs.readFileSync(filePath, 'utf8');
   const { data, content } = matter(fileContents);
+
+  console.log({ metadata: data });
 
   return {
     metadata: data as PostMetadata,
@@ -77,7 +79,7 @@ export function createMarkdownPost(filePath: string): MarkdownPost {
     tags,
     cover: metadata.cover || '/default.webp',
     icon: metadata.icon || '/mascot.webp',
-    publishTime: metadata.publishTime || new Date().toISOString(),
+    publishTime: metadata.date || new Date().toISOString(),
     slug: fileName,
     status: metadata.status || 'Draft',
   };
@@ -96,7 +98,7 @@ export function getAllMarkdownPosts(directory: string): MarkdownPost[] {
   const posts: MarkdownPost[] = [];
 
   function traverseDirectory(dir: string) {
-    const files = fs.readdirSync(dir);
+    const files = fs.readdirSync(dir).sort(); // 파일명 순으로 정렬하여 일관성 확보
 
     for (const file of files) {
       const filePath = path.join(dir, file);
@@ -117,8 +119,18 @@ export function getAllMarkdownPosts(directory: string): MarkdownPost[] {
 
   traverseDirectory(fullPath);
 
-  // Sort posts by publish time (newest first)
-  return posts.sort((a, b) => new Date(b.publishTime).getTime() - new Date(a.publishTime).getTime());
+  // Sort posts by publish time (newest first), then by slug for stable sorting
+  return posts.sort((a, b) => {
+    const timeA = new Date(a.publishTime).getTime();
+    const timeB = new Date(b.publishTime).getTime();
+
+    if (timeB !== timeA) {
+      return timeB - timeA;
+    }
+
+    // If publish times are equal, sort by slug alphabetically
+    return a.slug.localeCompare(b.slug);
+  });
 }
 
 /**
