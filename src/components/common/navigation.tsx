@@ -1,8 +1,8 @@
 'use client';
 
-import { useParams, usePathname } from 'next/navigation';
+import { Navbar, NavbarContent, NavbarItem } from '@heroui/navbar';
 
-import { Navbar, NavbarContent, NavbarItem } from "@heroui/navbar";
+import { useParams, usePathname } from 'next/navigation';
 
 import { Link } from '@/app/i18n/routing';
 import { cn } from '@/lib/utils';
