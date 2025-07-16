@@ -15,7 +15,7 @@ import python from 'react-syntax-highlighter/dist/cjs/languages/prism/python';
 import tsx from 'react-syntax-highlighter/dist/cjs/languages/prism/tsx';
 import typescript from 'react-syntax-highlighter/dist/cjs/languages/prism/typescript';
 
-import { useMemo } from 'react';
+import { MarkdownComponents } from '../markdown-components';
 
 SyntaxHighlighter.registerLanguage('tsx', tsx);
 SyntaxHighlighter.registerLanguage('typescript', typescript);
@@ -35,31 +35,5 @@ interface PostBodyProps {
 }
 
 export default function PostBody({ content }: PostBodyProps) {
-  const MarkdownComponents = useMemo(
-    () => ({
-      code({
-        inline,
-        className,
-        children,
-        ...props
-      }: {
-        inline: boolean;
-        className: string;
-        children: React.ReactNode;
-      }) {
-        const match = /language-(\w+)/.exec(className || '');
-        return !inline && match ? (
-          <SyntaxHighlighter language={match[1]} PreTag="div" {...props}>
-            {String(children).replace(/\n$/, '')}
-          </SyntaxHighlighter>
-        ) : (
-          <code className={className} {...props}>
-            {children}
-          </code>
-        );
-      },
-    }),
-    [],
-  );
   return <ReactMarkdown components={MarkdownComponents as Components}>{content}</ReactMarkdown>;
 }

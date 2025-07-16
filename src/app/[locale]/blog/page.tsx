@@ -8,10 +8,7 @@ import Posts from './_components/posts';
 export default function PostPage() {
   const posts = getAllMarkdownPosts('content/posts');
 
-  // console.log(
-  //   posts,
-  //   posts.map((p) => p.tags),
-  // );
+  console.log(posts);
 
   return (
     <div className="container mx-auto px-4 py-8">
