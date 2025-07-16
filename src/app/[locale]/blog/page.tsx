@@ -15,7 +15,7 @@ export default function PostPage() {
       publishTime: new Date(post.publishTime).toLocaleDateString(),
       publishTimeOriginal: post.publishTime, // 정렬을 위해 원본 시간 보존
       status: post.status,
-      tags: post.tags.map((tag) => tag.name),
+      tags: post.tags,
       thumbnail: post.cover,
     }))
     .filter((post) => post.status === 'Live')
