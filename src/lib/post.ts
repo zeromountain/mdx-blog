@@ -73,7 +73,7 @@ export function createMarkdownPost(filePath: string): MarkdownPost {
     cover: metadata.cover || '/default.webp',
     icon: metadata.icon || '/mascot.webp',
     publishTime: metadata.date || new Date().toISOString(),
-    slug: fileName,
+    slug: metadata.slug || fileName,
     status: metadata.status || 'Draft',
     description: metadata.description || '',
     readingTime: _readingTime,

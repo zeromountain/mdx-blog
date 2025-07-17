@@ -1,7 +1,7 @@
 import copy from 'copy-to-clipboard';
 import { Check, Copy } from 'lucide-react';
 import { Prism as SyntaxHighlighter, SyntaxHighlighterProps } from 'react-syntax-highlighter';
-import { dark } from 'react-syntax-highlighter/dist/esm/styles/prism';
+import { darcula } from 'react-syntax-highlighter/dist/esm/styles/prism';
 
 import { useState } from 'react';
 
@@ -27,7 +27,25 @@ export const MarkdownCode = ({ children, language, ...props }: SyntaxHighlighter
           {copied ? <Check className="h-4 w-4 text-green-400" /> : <Copy className="h-4 w-4" />}
         </button>
       </div>
-      <SyntaxHighlighter {...props} language={language} style={dark} PreTag="div">
+      <SyntaxHighlighter
+        {...props}
+        language={language}
+        style={darcula}
+        wrapLongLines
+        wrapLines
+        showLineNumbers
+        customStyle={{
+          backgroundColor: 'transparent',
+          padding: '0',
+          margin: '0',
+          borderRadius: '8px',
+          border: 'none',
+          fontSize: '14px',
+          fontWeight: '500',
+          lineHeight: '20px',
+          textAlign: 'left',
+        }}
+      >
         {String(children).replace(/\n$/, '')}
       </SyntaxHighlighter>
     </div>

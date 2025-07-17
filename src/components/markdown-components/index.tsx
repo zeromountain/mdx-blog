@@ -1,19 +1,13 @@
 import { MarkdownCode } from './markdown-code';
 import { MarkdownImage } from './markdown-image';
+import { MarkdownList } from './markdown-list';
+import { MarkdownUnorderedList } from './markdown-unordered-list';
 
 export const MarkdownComponents = {
-  code: ({
-    inline,
-    className,
-    children,
-    ...props
-  }: {
-    inline: boolean;
-    className: string;
-    children: React.ReactNode;
-  }) => {
+  code: (props: any) => {
+    const { inline, className, children, ...rest } = props;
     const match = /language-(\w+)/.exec(className || '');
-    return !inline ? (
+    return match ? (
       <MarkdownCode {...props} language={match?.[1]}>
         {String(children).replace(/\n$/, '')}
       </MarkdownCode>
@@ -24,4 +18,6 @@ export const MarkdownComponents = {
     );
   },
   img: MarkdownImage,
+  ul: MarkdownUnorderedList,
+  li: MarkdownList,
 };
