@@ -1,4 +1,3 @@
-import { MDXContent } from '@/components/mdx-content';
 import { About } from '@/types/contentlayer';
 
 interface AboutContentProps {
@@ -6,10 +5,10 @@ interface AboutContentProps {
   className?: string;
 }
 
-export function AboutContent({ content, className }: AboutContentProps) {
+export function AboutContent({ className }: AboutContentProps) {
   return (
     <div className={`prose prose-lg dark:prose-invert ${className || ''}`}>
-      <MDXContent code={content.body.code} />
+      {/* <MDXContent code={content.body.code} /> */}
     </div>
   );
 }

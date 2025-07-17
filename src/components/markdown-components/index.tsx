@@ -6,7 +6,7 @@ import { MarkdownUnorderedList } from './markdown-unordered-list';
 
 export const MarkdownComponents = {
   code: (props: any) => {
-    const { inline, className, children, ...rest } = props;
+    const { className, children } = props;
     const match = /language-(\w+)/.exec(className || '');
     return match ? (
       <MarkdownCode {...props} language={match?.[1]}>

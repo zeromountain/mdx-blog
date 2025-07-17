@@ -1,5 +1,3 @@
-import { allPosts } from 'contentlayer/generated';
-
 import { notFound } from 'next/navigation';
 
 import { getAllMarkdownPosts } from '@/lib/post';
