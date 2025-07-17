@@ -11,7 +11,7 @@ export interface MarkdownPost {
   title: string;
   content: string;
   tags: string[];
-  cover: string;
+  thumbnail: string;
   icon: string;
   publishTime: string;
   slug: string;
@@ -70,7 +70,7 @@ export function createMarkdownPost(filePath: string): MarkdownPost {
     title: metadata.title || fileName,
     content,
     tags: metadata.tags || [],
-    cover: metadata.cover || '/default.webp',
+    thumbnail: metadata.cover || '/default.webp',
     icon: metadata.icon || '/mascot.webp',
     publishTime: metadata.date || new Date().toISOString(),
     slug: metadata.slug || fileName,

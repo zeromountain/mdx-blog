@@ -6,16 +6,10 @@ import { Chip } from '@heroui/chip';
 import Image from 'next/image';
 
 import { Link } from '@/app/i18n/routing';
+import { MarkdownPost } from '@/lib/post';
 
 interface PostCardProps {
-  post: {
-    title: string;
-    slug: string;
-    publishTime: string;
-    status: string;
-    tags: string[];
-    thumbnail: string;
-  };
+  post: MarkdownPost;
 }
 
 export default function PostCard({ post }: PostCardProps) {
@@ -38,7 +32,7 @@ export default function PostCard({ post }: PostCardProps) {
               {post.tags.map((tag) => (
                 <Chip
                   key={tag}
-                  className="mr-2 bg-primary-100 text-xs text-primary-800 dark:bg-primary-900/30 dark:text-primary-300"
+                  className="bg-primary-50 text-sm text-primary-500 dark:bg-primary-900/30 dark:text-primary-400"
                 >
                   {tag}
                 </Chip>
@@ -48,7 +42,7 @@ export default function PostCard({ post }: PostCardProps) {
           </div>
           <div className="mt-4 flex flex-row items-center justify-between">
             <p className="text-xs text-gray-500">{post.publishTime}</p>
-            {/* <p className="text-xs text-gray-500">{post.readingTime.text}</p> */}
+            <p className="text-xs text-gray-500">{post.readingTime} min</p>
           </div>
         </div>
       </Card>

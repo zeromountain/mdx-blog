@@ -1,14 +1,9 @@
+import { MarkdownPost } from '@/lib/post';
+
 import PostCard from './post-card';
 
 interface IPostsProps {
-  posts: {
-    title: string;
-    slug: string;
-    publishTime: string;
-    status: string;
-    tags: string[];
-    thumbnail: string;
-  }[];
+  posts: MarkdownPost[];
 }
 
 export default function Posts({ posts }: IPostsProps) {

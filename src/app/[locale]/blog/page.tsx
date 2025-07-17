@@ -10,13 +10,15 @@ export default function PostPage() {
 
   const mappedPosts = posts
     .map((post) => ({
+      ...post,
       title: post.title,
       slug: post.slug,
       publishTime: new Date(post.publishTime).toLocaleDateString(),
       publishTimeOriginal: post.publishTime, // 정렬을 위해 원본 시간 보존
       status: post.status,
       tags: post.tags,
-      thumbnail: post.cover,
+      readingTime: post.readingTime,
+      thumbnail: post.thumbnail,
     }))
     .filter((post) => post.status === 'Live')
     .sort((a, b) => {

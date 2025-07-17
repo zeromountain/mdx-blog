@@ -84,7 +84,7 @@ export default function PostNavigation({ post, prevPost, nextPost }: PostNavigat
       {/* 헤더 섹션 */}
       <PostHeader
         title={post.title}
-        categoryPath={post.tags.join(', ')}
+        tags={post.tags}
         date={post.publishTime}
         readingTime={post.readingTime.toString()}
       />
