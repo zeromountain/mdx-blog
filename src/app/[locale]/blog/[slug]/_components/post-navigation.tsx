@@ -1,18 +1,19 @@
 'use client';
 
-import { Post } from 'contentlayer/generated';
 import { format } from 'date-fns';
-import { ArrowLeft, ArrowUp, Calendar, Clock } from 'lucide-react';
+import { ArrowLeft, ArrowUp } from 'lucide-react';
 
 import { useEffect, useState } from 'react';
 
 import { Link } from '@/app/i18n/routing';
-import { MDXContent } from '@/components/mdx-content';
+import PostBody from '@/components/post/post-body';
+import PostHeader from '@/components/post/post-header';
+import { MarkdownPost } from '@/lib/post';
 
 interface PostNavigationProps {
-  post: Post;
-  prevPost: Post | null;
-  nextPost: Post | null;
+  post: MarkdownPost;
+  prevPost: MarkdownPost | null;
+  nextPost: MarkdownPost | null;
 }
 
 export default function PostNavigation({ post, prevPost, nextPost }: PostNavigationProps) {
@@ -39,7 +40,7 @@ export default function PostNavigation({ post, prevPost, nextPost }: PostNavigat
       // 스크롤 위치가 200px 이상이면 FAB 버튼 표시
       const scrollTop = scrollContainer.scrollTop;
       const shouldShow = scrollTop > 200;
-      console.log('스크롤 위치:', scrollTop, '버튼 표시:', shouldShow);
+
       setShowScrollTop(shouldShow);
     };
 
@@ -81,42 +82,17 @@ export default function PostNavigation({ post, prevPost, nextPost }: PostNavigat
       </div>
 
       {/* 헤더 섹션 */}
-      <div className="mb-12 border-b border-gray-200 pb-8 dark:border-gray-800">
-        {/* 태그 */}
-        <div className="mb-4 flex flex-wrap gap-2">
-          {post.tags.map((tag) => (
-            <span
-              key={tag}
-              className="rounded-full bg-primary-50 px-3 py-1 text-xs font-medium text-primary-700 transition-colors hover:bg-primary-100 dark:bg-primary-900/30 dark:text-primary-300 dark:hover:bg-primary-900/50"
-            >
-              {tag}
-            </span>
-          ))}
-        </div>
-
-        {/* 제목 */}
-        <h1 className="mb-6 bg-gradient-to-r from-gray-900 to-gray-600 bg-clip-text text-4xl font-bold leading-tight text-transparent dark:from-gray-100 dark:to-gray-400 md:text-5xl">
-          {post.title}
-        </h1>
-
-        {/* 메타데이터 */}
-        <div className="flex flex-wrap items-center gap-6 text-sm text-gray-600 dark:text-gray-400">
-          <div className="flex items-center gap-2">
-            <Calendar className="h-4 w-4" />
-            <time dateTime={post.date}>{mounted ? formatDate(post.date) : ''}</time>
-          </div>
-          {mounted && (
-            <div className="flex items-center gap-2">
-              <Clock className="h-4 w-4" />
-              <span>{post.readingTime.text}</span>
-            </div>
-          )}
-        </div>
-      </div>
+      <PostHeader
+        title={post.title}
+        tags={post.tags}
+        date={post.publishTime}
+        readingTime={post.readingTime.toString()}
+      />
 
       {/* 블로그 컨텐츠 */}
       <article className="prose prose-lg mx-auto max-w-none dark:prose-invert prose-headings:font-bold prose-headings:text-gray-900 prose-a:text-primary-600 prose-code:rounded-md prose-code:bg-gray-100 prose-code:p-1 prose-code:font-normal prose-code:text-primary-700 prose-pre:overflow-x-auto prose-pre:rounded-lg prose-img:rounded-lg dark:prose-headings:text-gray-100 dark:prose-a:text-primary-400 dark:prose-code:bg-gray-800 dark:prose-code:text-primary-400">
-        <MDXContent code={post.body.code} />
+        {/* <MDXContent code={post.body.code} /> */}
+        <PostBody content={post.content} />
       </article>
 
       {/* 이전/다음 포스트 네비게이션 */}
@@ -131,7 +107,7 @@ export default function PostNavigation({ post, prevPost, nextPost }: PostNavigat
               <span className="mb-2 text-lg font-medium text-gray-900 transition-colors group-hover:text-primary-700 dark:text-gray-100 dark:group-hover:text-primary-400">
                 {prevPost.title}
               </span>
-              <span className="text-sm text-gray-500 dark:text-gray-400">{formatDate(prevPost.date)}</span>
+              <span className="text-sm text-gray-500 dark:text-gray-400">{formatDate(prevPost.publishTime)}</span>
             </Link>
           )}
 
@@ -144,7 +120,7 @@ export default function PostNavigation({ post, prevPost, nextPost }: PostNavigat
               <span className="mb-2 text-lg font-medium text-gray-900 transition-colors group-hover:text-primary-700 dark:text-gray-100 dark:group-hover:text-primary-400">
                 {nextPost.title}
               </span>
-              <span className="text-sm text-gray-500 dark:text-gray-400">{formatDate(nextPost.date)}</span>
+              <span className="text-sm text-gray-500 dark:text-gray-400">{formatDate(nextPost.publishTime)}</span>
             </Link>
           )}
         </div>

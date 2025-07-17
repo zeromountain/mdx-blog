@@ -1,5 +1,4 @@
 import fs from 'fs';
-import { withContentlayer } from 'next-contentlayer';
 import createNextIntlPlugin from 'next-intl/plugin';
 import path from 'path';
 
@@ -45,4 +44,4 @@ const nextConfig = {
   },
 };
 
-export default withContentlayer(withNextIntl(nextConfig));
+export default withNextIntl(nextConfig);

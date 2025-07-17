@@ -5,17 +5,12 @@ import type { Metadata } from 'next';
 import localFont from 'next/font/local';
 import { notFound } from 'next/navigation';
 
-import 'react-notion-x/src/styles.css';
-
 import Navigation from '@/components/common/navigation';
 import { HomeLayout } from '@/components/layouts/home-layouts';
 import { WithHeroUIProvider } from '@/providers/with-next-ui-provider';
 
 import { routing } from '../i18n/routing';
 import './globals.css';
-
-import 'katex/dist/katex.min.css';
-import 'prismjs/themes/prism-tomorrow.css';
 
 const geistSans = localFont({
   src: './fonts/GeistVF.woff',
@@ -49,7 +44,7 @@ export default async function RootLayout({
   const messages = await getMessages();
 
   return (
-    <html lang={locale}>
+    <html lang={locale} suppressHydrationWarning>
       <body className={`${geistSans.variable} ${geistMono.variable} overflow-hidden antialiased`}>
         <WithHeroUIProvider>
           <NextIntlClientProvider messages={messages}>
