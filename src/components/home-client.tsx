@@ -1,29 +1,27 @@
 'use client';
 
-import { useTranslations } from 'next-intl';
-
 import { useEffect, useState } from 'react';
 
-export default function Home() {
-  const t = useTranslations('common');
+interface HomeClientProps {
+  greeting: string;
+  subtitle: string;
+  description: string;
+}
+
+export default function HomeClient({ greeting, subtitle, description }: HomeClientProps) {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [isClicked, setIsClicked] = useState(false);
 
   useEffect(() => {
-    const handleMouseMove = (event: globalThis.MouseEvent) => {
+    const handleMouseMove = (event: MouseEvent) => {
       setMousePosition({
         x: event.clientX,
         y: event.clientY,
       });
     };
 
-    const handleMouseDown = () => {
-      setIsClicked(true);
-    };
-
-    const handleMouseUp = () => {
-      setIsClicked(false);
-    };
+    const handleMouseDown = () => setIsClicked(true);
+    const handleMouseUp = () => setIsClicked(false);
 
     window.addEventListener('mousemove', handleMouseMove);
     window.addEventListener('mousedown', handleMouseDown);
@@ -47,14 +45,11 @@ export default function Home() {
       <div className="relative z-10 flex h-[calc(100vh-60px)] flex-col items-center justify-center">
         <div className="text-center">
           <h1 className="mb-4 text-4xl font-bold text-gray-200 md:text-6xl">
-            {t('greeting')} <span className="inline-block animate-wave">👋</span>
+            {greeting} <span className="inline-block animate-wave">👋</span>
           </h1>
-
-          <h2 className="mb-6 text-2xl text-gray-300 md:text-3xl">{t('subtitle')}</h2>
-
-          <p className="mx-auto max-w-2xl whitespace-pre-line text-lg text-gray-400 md:text-xl">{t('description')}</p>
+          <h2 className="mb-6 text-2xl text-gray-300 md:text-3xl">{subtitle}</h2>
+          <p className="mx-auto max-w-2xl whitespace-pre-line text-lg text-gray-400 md:text-xl">{description}</p>
         </div>
-
         {/* 축구공 이모지 */}
         <div
           className="z-1000 pointer-events-none fixed text-4xl transition-all duration-200 ease-out"
@@ -67,12 +62,6 @@ export default function Home() {
           ⚽️
         </div>
       </div>
-
-      {/* 스크롤 안내 */}
-      {/* <div className="absolute bottom-10 left-1/2 -translate-x-1/2 transform text-center">
-        <p className="mb-2 text-sm text-white/50">스크롤하여 더 알아보기</p>
-        <div className="mx-auto h-6 w-6 animate-bounce text-white/70">↓</div>
-      </div> */}
     </div>
   );
 }

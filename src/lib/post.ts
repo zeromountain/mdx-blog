@@ -29,6 +29,8 @@ export interface PostMetadata {
   [key: string]: any;
 }
 
+const postsDirectory = path.join(process.cwd(), 'content/posts');
+
 /**
  * Parse markdown file and extract frontmatter and content
  */
@@ -60,7 +62,6 @@ export async function markdownToHtml(markdown: string): Promise<string> {
 export function createMarkdownPost(filePath: string): MarkdownPost {
   const { metadata, content } = parseMarkdownFile(filePath);
   const fileName = path.basename(filePath, '.md');
-
   const _readingTime = Math.ceil(readingTime(content).minutes);
 
   return {
@@ -82,7 +83,7 @@ export function createMarkdownPost(filePath: string): MarkdownPost {
  * Get all markdown posts from a directory
  */
 export function getAllMarkdownPosts(directory: string): MarkdownPost[] {
-  const fullPath = path.join(process.cwd(), directory);
+  const fullPath = postsDirectory;
 
   if (!fs.existsSync(fullPath)) {
     return [];
@@ -101,7 +102,7 @@ export function getAllMarkdownPosts(directory: string): MarkdownPost[] {
         traverseDirectory(filePath);
       } else if (file.endsWith('.md')) {
         try {
-          const post = createMarkdownPost(filePath);
+          const post = createMarkdownPost(filePath); // ← 파일 경로 넘김
           posts.push(post);
         } catch (error) {
           console.error(`Error parsing ${filePath}:`, error);
