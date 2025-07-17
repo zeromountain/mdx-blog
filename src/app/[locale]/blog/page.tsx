@@ -6,7 +6,7 @@ import PostCardSkeleton from './_components/post-card-skeleton';
 import Posts from './_components/posts';
 
 export default function PostPage() {
-  const posts = getAllMarkdownPosts('content/posts');
+  const posts = getAllMarkdownPosts();
 
   const mappedPosts = posts
     .map((post) => ({

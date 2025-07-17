@@ -82,7 +82,7 @@ export function createMarkdownPost(filePath: string): MarkdownPost {
 /**
  * Get all markdown posts from a directory
  */
-export function getAllMarkdownPosts(directory: string): MarkdownPost[] {
+export function getAllMarkdownPosts(): MarkdownPost[] {
   const fullPath = postsDirectory;
 
   if (!fs.existsSync(fullPath)) {
@@ -130,24 +130,24 @@ export function getAllMarkdownPosts(directory: string): MarkdownPost[] {
 /**
  * Get a specific markdown post by slug
  */
-export function getMarkdownPostBySlug(directory: string, slug: string): MarkdownPost | null {
-  const posts = getAllMarkdownPosts(directory);
+export function getMarkdownPostBySlug(slug: string): MarkdownPost | null {
+  const posts = getAllMarkdownPosts();
   return posts.find((post) => post.slug === slug) || null;
 }
 
 /**
  * Get posts filtered by tag
  */
-export function getPostsByTag(directory: string, tagName: string): MarkdownPost[] {
-  const posts = getAllMarkdownPosts(directory);
+export function getPostsByTag(tagName: string): MarkdownPost[] {
+  const posts = getAllMarkdownPosts();
   return posts.filter((post) => post.tags.some((tag) => tag.toLowerCase() === tagName.toLowerCase()));
 }
 
 /**
  * Get all unique tags from posts
  */
-export function getAllTags(directory: string): string[] {
-  const posts = getAllMarkdownPosts(directory);
+export function getAllTags(): string[] {
+  const posts = getAllMarkdownPosts();
   const tagMap = new Map<string, string>();
 
   posts.forEach((post) => {

@@ -7,7 +7,7 @@ import PostNavigation from './_components/post-navigation';
 import 'prismjs/themes/prism-tomorrow.css';
 
 export const generateMetadata = ({ params }: { params: { slug: string; locale: string } }) => {
-  const posts = getAllMarkdownPosts('content/posts');
+  const posts = getAllMarkdownPosts();
   const post = posts.find((post) => post.slug === params.slug);
   if (!post) return {};
 
@@ -20,7 +20,7 @@ export const generateMetadata = ({ params }: { params: { slug: string; locale: s
 
 export const generateStaticParams = async () => {
   const locales = ['ko', 'en'];
-  const posts = getAllMarkdownPosts('content/posts');
+  const posts = getAllMarkdownPosts();
   const paths = [];
 
   // 각 로케일과 슬러그의 조합으로 경로 생성
@@ -38,7 +38,7 @@ export const generateStaticParams = async () => {
 
 export default function PostPage({ params }: { params: { slug: string; locale: string } }) {
   // 현재 포스트 찾기
-  const posts = getAllMarkdownPosts('content/posts');
+  const posts = getAllMarkdownPosts();
   const post = posts.find((post) => post.slug === params.slug);
 
   if (!post) {
