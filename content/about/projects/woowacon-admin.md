@@ -93,7 +93,7 @@ const speakers = [
 const SessionManagementForm = () => {
   const toast = useToast();
   const [selectedYear, setSelectedYear] = useState(new Date().getFullYear());
-  
+
   const {
     control,
     register,
@@ -119,20 +119,20 @@ const SessionManagementForm = () => {
       ]
     }
   });
-  
+
   // 세션 배열 관리
   const { fields, append, remove } = useFieldArray({
     control,
     name: "sessions"
   });
-  
+
   // 현재 설정된 트랙 수 감시
   const trackCount = watch("trackCount");
-  
+
   // 폼 제출 처리
   const onSubmit = (data) => {
     console.log("세션 데이터:", data);
-    
+
     // API 호출 코드 대신 토스트 메시지로 대체
     toast({
       title: "세션 저장 완료",
@@ -142,7 +142,7 @@ const SessionManagementForm = () => {
       isClosable: true,
     });
   };
-  
+
   return (
     ...
   );
@@ -200,19 +200,14 @@ export const AuthProvider: React.FC = ({ children }) => {
   const hasPermission = useCallback(
     (requiredPermission: string, conferenceId?: string) => {
       // 권한 검증 로직
-      return permissions.some(p => 
-        p.name === requiredPermission && 
-        (!conferenceId || p.conferenceId === conferenceId)
+      return permissions.some(
+        (p) => p.name === requiredPermission && (!conferenceId || p.conferenceId === conferenceId),
       );
     },
-    [permissions]
+    [permissions],
   );
 
-  return (
-    <AuthContext.Provider value={{ currentUser, permissions, hasPermission }}>
-      {children}
-    </AuthContext.Provider>
-  );
+  return <AuthContext.Provider value={{ currentUser, permissions, hasPermission }}>{children}</AuthContext.Provider>;
 };
 ```
 
@@ -230,7 +225,7 @@ const theme = extendTheme({
     woowa: {
       50: '#f5f9ff',
       100: '#e0edff',
-      500: '#2ac1bc', 
+      500: '#2ac1bc',
       900: '#06504e',
     },
   },

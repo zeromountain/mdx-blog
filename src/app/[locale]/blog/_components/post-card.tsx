@@ -28,7 +28,7 @@ export default function PostCard({ post }: PostCardProps) {
         </CardHeader>
         <div className="flex h-full flex-col justify-between">
           <div>
-            <div className="mb-4 flex">
+            <div className="mb-4 flex flex-wrap gap-2">
               {post.tags.map((tag) => (
                 <Chip
                   key={tag}

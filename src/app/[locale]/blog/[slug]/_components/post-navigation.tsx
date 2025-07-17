@@ -40,7 +40,7 @@ export default function PostNavigation({ post, prevPost, nextPost }: PostNavigat
       // 스크롤 위치가 200px 이상이면 FAB 버튼 표시
       const scrollTop = scrollContainer.scrollTop;
       const shouldShow = scrollTop > 200;
-      console.log('스크롤 위치:', scrollTop, '버튼 표시:', shouldShow);
+
       setShowScrollTop(shouldShow);
     };
 

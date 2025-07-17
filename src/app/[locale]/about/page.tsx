@@ -17,8 +17,8 @@ import { AboutSection } from '@/components/about/about-section';
 function ProfileContent() {
   return (
     <div className="prose prose-lg dark:prose-invert">
-      <h2>소개</h2>
-      <p>
+      <h2 className="text-2xl font-bold">소개</h2>
+      <p className="text-sm text-gray-500 dark:text-gray-100">
         다양한 직군의 팀원들과 협업하며 다양한 경험을 쌓았습니다.
         <br />
         성장을 취우선 가치로 여기며 효율적인 업무 문화를 만들어가는 것을 중요하게 생각합니다.
@@ -37,12 +37,6 @@ function PortfolioContent() {
 
   // contentlayer에서 프로젝트 섹션의 MDX 파일들을 가져옵니다
   const projectItems = useMemo(() => {
-    // 디버깅용 로깅
-    console.log(
-      'Available projects:',
-      allAbouts.filter((about) => about.section === 'projects').map((p) => ({ title: p.title, slug: p.slug })),
-    );
-
     return allAbouts
       .filter((about) => about.section === 'projects')
       .sort((a, b) => (a.order || 999) - (b.order || 999))
@@ -133,8 +127,8 @@ export default function AboutPage() {
       {/* 프로필 헤더 섹션 */}
       <section className="flex flex-col-reverse items-center justify-between gap-4 sm:flex-row">
         <div className="flex flex-1 flex-col gap-2">
-          <h2 className="text-2xl font-bold">{profileInfo.title}</h2>
-          <p className="text-sm text-gray-500">{profileInfo.description}</p>
+          <h2 className="text-2xl font-bold text-black dark:text-gray-100">{profileInfo.title}</h2>
+          <p className="text-sm text-gray-500 dark:text-gray-100">{profileInfo.description}</p>
           <div className="flex gap-2">
             <Link
               href="https://github.com/zeromountain"
@@ -174,7 +168,7 @@ export default function AboutPage() {
       <div className="rounded-lg border border-yellow-200 bg-yellow-50 p-4 dark:border-yellow-900 dark:bg-yellow-900/20">
         <h3 className="mb-2 font-medium">개발 중입니다</h3>
         <p className="text-sm text-gray-600 dark:text-gray-400">
-          MDX 콘텐츠를 기반으로 한 포트폴리오 페이지로 현재 개발 중입니다. 곧 모든 섹션이 완성될 예정입니다.
+          마크다운 콘텐츠를 기반으로 한 포트폴리오 페이지로 현재 개발 중입니다. 곧 모든 섹션이 완성될 예정입니다.
         </p>
       </div>
     </div>

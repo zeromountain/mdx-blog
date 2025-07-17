@@ -6,6 +6,8 @@ import { getAllMarkdownPosts } from '@/lib/post';
 
 import PostNavigation from './_components/post-navigation';
 
+import 'prismjs/themes/prism-tomorrow.css';
+
 export const generateMetadata = ({ params }: { params: { slug: string; locale: string } }) => {
   const posts = getAllMarkdownPosts('content/posts');
   const post = posts.find((post) => post.slug === params.slug);
@@ -42,11 +44,6 @@ export default function PostPage({ params }: { params: { slug: string; locale: s
   const post = posts.find((post) => post.slug === params.slug);
 
   if (!post) {
-    console.log('포스트를 찾을 수 없습니다:', params.slug);
-    console.log(
-      '사용 가능한 포스트들:',
-      allPosts.map((p) => p.slug),
-    );
     return notFound();
   }
 

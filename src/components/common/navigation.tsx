@@ -22,11 +22,6 @@ const links = [
     path: 'blog',
   },
   {
-    label: 'Algorithms',
-    href: '/algorithms',
-    path: 'algorithms',
-  },
-  {
     label: 'About',
     href: '/about',
     path: 'about',

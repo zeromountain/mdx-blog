@@ -39,8 +39,6 @@ export function parseMarkdownFile(filePath: string): {
   const fileContents = fs.readFileSync(filePath, 'utf8');
   const { data, content } = matter(fileContents);
 
-  console.log({ metadata: data });
-
   return {
     metadata: data as PostMetadata,
     content: content.trim(),
