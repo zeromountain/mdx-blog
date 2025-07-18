@@ -1,0 +1,11 @@
+.blogDetailLayout ul {
+  list-style: disc;
+}
+
+.blogDetailLayout ul ul {
+  list-style: circle;
+}
+
+.blogDetailLayout ul ul ul {
+  list-style: square;
+}
