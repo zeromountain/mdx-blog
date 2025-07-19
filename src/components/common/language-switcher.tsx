@@ -66,6 +66,12 @@ export default function LanguageSwitcher() {
       }}
       size="sm"
       variant="bordered"
+      popoverProps={{
+        placement: 'bottom-end',
+        offset: 10,
+        shouldFlip: true,
+        shouldCloseOnBlur: true,
+      }}
     >
       {languages.map((language) => (
         <SelectItem

@@ -51,7 +51,7 @@ export default function Navigation() {
 
   return (
     <Navbar isBlurred isBordered className="z-100">
-      <NavbarContent>
+      <NavbarContent justify="start">
         {links.map((link) => (
           <NavbarItem key={link.href}>
             <Link
@@ -66,8 +66,14 @@ export default function Navigation() {
           </NavbarItem>
         ))}
       </NavbarContent>
-      <LanguageSwitcher />
-      <ThemeSwitcher />
+      <NavbarContent justify="end">
+        <NavbarItem>
+          <LanguageSwitcher />
+        </NavbarItem>
+        <NavbarItem>
+          <ThemeSwitcher />
+        </NavbarItem>
+      </NavbarContent>
     </Navbar>
   );
 }
