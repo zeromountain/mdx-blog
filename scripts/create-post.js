@@ -180,7 +180,7 @@ async function main() {
     fs.mkdirSync(dir, { recursive: true });
   }
 
-  const filePath = path.join(dir, `${slug}.mdx`);
+  const filePath = path.join(dir, `${slug}.md`);
   fs.writeFileSync(filePath, mdxContent);
 
   console.log(`\n✅ 포스트가 생성되었습니다: ${filePath}`);

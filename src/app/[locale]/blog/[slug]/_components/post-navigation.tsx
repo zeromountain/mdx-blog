@@ -6,6 +6,7 @@ import { ArrowLeft, ArrowUp } from 'lucide-react';
 import { useEffect, useState } from 'react';
 
 import { Link } from '@/app/i18n/routing';
+import AdBanner from '@/components/banner/ad-banner';
 import PostBody from '@/components/post/post-body';
 import PostHeader from '@/components/post/post-header';
 import { MarkdownPost } from '@/lib/post';
@@ -88,6 +89,8 @@ export default function PostNavigation({ post, prevPost, nextPost }: PostNavigat
         date={post.publishTime}
         readingTime={post.readingTime.toString()}
       />
+
+      <AdBanner />
 
       {/* 블로그 컨텐츠 */}
       <article className="prose prose-lg mx-auto max-w-none dark:prose-invert prose-headings:font-bold prose-headings:text-gray-900 prose-a:text-primary-600 prose-code:rounded-md prose-code:bg-gray-100 prose-code:p-1 prose-code:font-normal prose-code:text-primary-700 prose-pre:overflow-x-auto prose-pre:rounded-lg prose-img:rounded-lg dark:prose-headings:text-gray-100 dark:prose-a:text-primary-400 dark:prose-code:bg-gray-800 dark:prose-code:text-primary-400">

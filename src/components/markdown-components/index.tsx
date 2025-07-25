@@ -1,4 +1,5 @@
 import { MarkdownCode } from './markdown-code';
+import MarkdownHeading1 from './markdown-heading1';
 import { MarkdownImage } from './markdown-image';
 import { MarkdownList } from './markdown-list';
 import { MarkdownParagraph } from './markdown-paragraph';
@@ -22,4 +23,5 @@ export const MarkdownComponents = {
   ul: MarkdownUnorderedList,
   li: MarkdownList,
   p: MarkdownParagraph,
+  h1: MarkdownHeading1,
 };
