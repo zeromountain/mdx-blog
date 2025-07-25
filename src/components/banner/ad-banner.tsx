@@ -8,9 +8,9 @@ export default function AdBanner() {
   if (!link) return null;
 
   return (
-    <div className="mx-auto my-6 flex w-full max-w-xl flex-col items-center justify-center rounded-lg border border-gray-200 bg-white p-4 shadow-md">
+    <div className="mx-auto my-6 flex w-full rounded-lg border border-gray-200 bg-white p-4 shadow-md">
       <div
-        className="flex cursor-pointer flex-row items-center gap-4"
+        className="flex cursor-pointer flex-row flex-col items-center gap-4 md:flex-row"
         onClick={() => {
           window.open(link.url, '_blank');
         }}
