@@ -1,6 +1,12 @@
 import { notFound } from 'next/navigation';
 
+import AdBanner from '@/components/banner/ad-banner';
+import PostBack from '@/components/post/post-back';
+import PostBody from '@/components/post/post-body';
+import PostFab from '@/components/post/post-fab';
+import PostHeader from '@/components/post/post-header';
 import { getAllMarkdownPosts } from '@/lib/post';
+import { LINKS } from '@/utils/ad-links';
 
 import PostNavigation from './_components/post-navigation';
 
@@ -57,5 +63,23 @@ export default function PostPage({ params }: { params: { slug: string; locale: s
   const prevPost = currentIndex < sortedPosts.length - 1 ? sortedPosts[currentIndex + 1] : null;
   const nextPost = currentIndex > 0 ? sortedPosts[currentIndex - 1] : null;
 
-  return <PostNavigation post={post} prevPost={prevPost} nextPost={nextPost} />;
+  return (
+    <div className="mx-auto max-w-4xl overflow-auto px-4">
+      <PostBack />
+      {/* 헤더 섹션 */}
+      <PostHeader
+        title={post.title}
+        tags={post.tags}
+        date={post.publishTime}
+        readingTime={post.readingTime.toString()}
+      />
+      <AdBanner category={post.tags[0] as keyof typeof LINKS} />
+      {/* 블로그 컨텐츠 */}
+      <article className="prose prose-lg mx-auto max-w-none dark:prose-invert prose-headings:font-bold prose-headings:text-gray-900 prose-a:text-primary-600 prose-code:rounded-md prose-code:bg-gray-100 prose-code:p-1 prose-code:font-normal prose-code:text-primary-700 prose-pre:overflow-x-auto prose-pre:rounded-lg prose-img:rounded-lg dark:prose-headings:text-gray-100 dark:prose-a:text-primary-400 dark:prose-code:bg-gray-800 dark:prose-code:text-primary-400">
+        <PostBody content={post.content} />
+      </article>
+      <PostNavigation post={post} prevPost={prevPost} nextPost={nextPost} />
+      <PostFab />
+    </div>
+  );
 }
