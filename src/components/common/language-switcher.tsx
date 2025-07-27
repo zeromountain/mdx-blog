@@ -20,6 +20,7 @@ const languages: Language[] = [
 export default function LanguageSwitcher() {
   const router = useRouter();
   const pathname = usePathname();
+
   const [selectedKeys, setSelectedKeys] = useState<Set<string>>(new Set(['ko']));
 
   useEffect(() => {
@@ -60,12 +61,12 @@ export default function LanguageSwitcher() {
       onSelectionChange={handleSelectionChange}
       startContent={currentLanguage.flag}
       classNames={{
-        base: 'w-32',
+        base: 'w-16 md:w-32',
         trigger: 'min-h-unit-10',
         value: 'text-sm',
       }}
       size="sm"
-      variant="bordered"
+      variant="flat"
       popoverProps={{
         placement: 'bottom-end',
         offset: 10,
@@ -79,6 +80,7 @@ export default function LanguageSwitcher() {
           startContent={language.flag}
           classNames={{
             base: 'text-sm',
+            selectedIcon: 'hidden md:block',
           }}
         >
           {language.name}

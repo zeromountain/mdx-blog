@@ -5,10 +5,9 @@ import PostBack from '@/components/post/post-back';
 import PostBody from '@/components/post/post-body';
 import PostFab from '@/components/post/post-fab';
 import PostHeader from '@/components/post/post-header';
+import PostNavigation from '@/components/post/post-navigation';
 import { getAllMarkdownPosts } from '@/lib/post';
 import { LINKS } from '@/utils/ad-links';
-
-import PostNavigation from './_components/post-navigation';
 
 import 'prismjs/themes/prism-tomorrow.css';
 
