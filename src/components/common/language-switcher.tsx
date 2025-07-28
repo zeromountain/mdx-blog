@@ -60,6 +60,7 @@ export default function LanguageSwitcher() {
       selectedKeys={selectedKeys}
       onSelectionChange={handleSelectionChange}
       startContent={currentLanguage.flag}
+      aria-label="언어 선택"
       classNames={{
         base: 'w-16 md:w-32',
         trigger: 'min-h-unit-10',
