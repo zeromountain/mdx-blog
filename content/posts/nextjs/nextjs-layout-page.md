@@ -3,7 +3,7 @@ title: nextjs 레이아웃과 페이지
 description: nextjs 레이아웃과 페이지 켄벤션 주요 내용
 date: 2025-07-27
 tags: ['nextjs']
-status: Draft
+status: Live
 slug: nextjs-layout-page
 ---
 
