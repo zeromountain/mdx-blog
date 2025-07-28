@@ -7,6 +7,7 @@ import PostBody from '@/components/post/post-body';
 import PostFab from '@/components/post/post-fab';
 import PostHeader from '@/components/post/post-header';
 import PostNavigation from '@/components/post/post-navigation';
+import TableOfContents from '@/components/post/table-of-contents';
 import { getAllMarkdownPosts } from '@/lib/post';
 import { LINKS } from '@/utils/ad-links';
 
@@ -205,22 +206,26 @@ export default function PostPage({ params }: { params: { slug: string; locale: s
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(blogPostData) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbData) }} />
-      <div className="mx-auto max-w-4xl overflow-auto px-4">
-        <PostBack />
-        {/* 헤더 섹션 */}
-        <PostHeader
-          title={post.title}
-          tags={post.tags}
-          date={post.publishTime}
-          readingTime={post.readingTime.toString()}
-        />
-        <AdBanner category={post.tags[0] as keyof typeof LINKS} />
-        {/* 블로그 컨텐츠 */}
-        <article className="prose prose-lg mx-auto max-w-none dark:prose-invert prose-headings:font-bold prose-headings:text-gray-900 prose-a:text-primary-600 prose-code:rounded-md prose-code:bg-gray-100 prose-code:p-1 prose-code:font-normal prose-code:text-primary-700 prose-pre:overflow-x-auto prose-pre:rounded-lg prose-img:rounded-lg dark:prose-headings:text-gray-100 dark:prose-a:text-primary-400 dark:prose-code:bg-gray-800 dark:prose-code:text-primary-400">
-          <PostBody content={post.content} />
-        </article>
-        <PostNavigation post={post} prevPost={prevPost} nextPost={nextPost} />
-        <PostFab />
+      <div className="relative">
+        <div className="mx-auto max-w-2xl overflow-auto px-4">
+          <PostBack />
+          {/* 헤더 섹션 */}
+          <PostHeader
+            title={post.title}
+            tags={post.tags}
+            date={post.publishTime}
+            readingTime={post.readingTime.toString()}
+          />
+          <AdBanner category={post.tags[0] as keyof typeof LINKS} />
+          {/* 블로그 컨텐츠 */}
+          <article className="prose prose-lg mx-auto max-w-none dark:prose-invert prose-headings:font-bold prose-headings:text-gray-900 prose-a:text-primary-600 prose-code:rounded-md prose-code:bg-gray-100 prose-code:p-1 prose-code:font-normal prose-code:text-primary-700 prose-pre:overflow-x-auto prose-pre:rounded-lg prose-img:rounded-lg dark:prose-headings:text-gray-100 dark:prose-a:text-primary-400 dark:prose-code:bg-gray-800 dark:prose-code:text-primary-400">
+            <PostBody content={post.content} />
+          </article>
+          <PostNavigation post={post} prevPost={prevPost} nextPost={nextPost} />
+          <PostFab />
+        </div>
+        {/* ToC - 우측 고정 */}
+        <TableOfContents content={post.content} />
       </div>
     </>
   );

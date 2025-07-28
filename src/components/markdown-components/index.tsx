@@ -1,5 +1,10 @@
 import { MarkdownCode } from './markdown-code';
 import MarkdownHeading1 from './markdown-heading1';
+import MarkdownHeading2 from './markdown-heading2';
+import MarkdownHeading3 from './markdown-heading3';
+import MarkdownHeading4 from './markdown-heading4';
+import MarkdownHeading5 from './markdown-heading5';
+import MarkdownHeading6 from './markdown-heading6';
 import { MarkdownImage } from './markdown-image';
 import { MarkdownList } from './markdown-list';
 import { MarkdownParagraph } from './markdown-paragraph';
@@ -24,4 +29,9 @@ export const MarkdownComponents = {
   li: MarkdownList,
   p: MarkdownParagraph,
   h1: MarkdownHeading1,
+  h2: MarkdownHeading2,
+  h3: MarkdownHeading3,
+  h4: MarkdownHeading4,
+  h5: MarkdownHeading5,
+  h6: MarkdownHeading6,
 };
